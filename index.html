@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ODEON · European Digital Health Academy</title>
+<title>ODEON · Digital Health Self-Assessment · EN / GR</title>
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="shortcut icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
 
 /* ── DESIGN TOKENS ───────────────────────────────────────────────── */
 :root {
@@ -1461,15 +1462,108 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   }
 }
 
+
+
+/* ══════════════════════════════════════════
+   LANGUAGE TOGGLE — rectangular, labels inside, gold slider
+══════════════════════════════════════════ */
+#lang-switch { display: none; }
+
+.lang-toggle-wrap {
+  position: absolute;
+  top: 28px;
+  right: 60px;
+  z-index: 200;
+}
+
+.lang-pill-track {
+  display: flex;
+  align-items: center;
+  width: 116px;
+  height: 36px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  padding: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.lang-pill-track::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  background: var(--gold);
+  border-radius: 4px;
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1);
+  z-index: 0;
+}
+
+#lang-switch:checked ~ .lang-en-root .lang-pill-track::before,
+#lang-switch:checked ~ .lang-el-root .lang-pill-track::before {
+  transform: translateX(calc(100% + 3px));
+}
+
+.lang-seg {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  border-radius: 4px;
+  transition: color 0.22s;
+  user-select: none;
+  pointer-events: none;
+}
+
+.lang-seg-en { color: var(--ink); font-weight: 500; }
+.lang-seg-gr { color: rgba(255,255,255,0.45); font-weight: 400; }
+
+#lang-switch:checked ~ .lang-en-root .lang-seg-en,
+#lang-switch:checked ~ .lang-el-root .lang-seg-en { color: rgba(255,255,255,0.45); font-weight: 400; }
+#lang-switch:checked ~ .lang-en-root .lang-seg-gr,
+#lang-switch:checked ~ .lang-el-root .lang-seg-gr { color: var(--ink); font-weight: 500; }
+
+.lang-en-root { display: block; }
+#lang-switch:checked ~ .lang-en-root { display: none; }
+.lang-el-root  { display: none; }
+#lang-switch:checked ~ .lang-el-root  { display: block; }
+
+.lang-en-root.in-assessment .lang-toggle-wrap,
+.lang-el-root.in-assessment  .lang-toggle-wrap { display: none; }
+
+@media (max-width: 640px) {
+  .lang-toggle-wrap { top: 18px; right: 20px; }
+  .lang-pill-track { width: 90px; height: 30px; }
+  .lang-seg { font-size: 10px; letter-spacing: 0.1em; }
+}
 </style>
 </head>
 <body>
 
+<input type="checkbox" id="lang-switch" aria-label="Switch to Greek">
+
+<div class="lang-en-root" id="root-en">
 <!-- ════════════════════════════════════════════
      COVER
 ════════════════════════════════════════════ -->
 <div class="cover" id="coverSection">
   <div class="cover-grid"></div>
+  <div class="lang-toggle-wrap">
+    <label class="lang-pill-track" for="lang-switch">
+      <span class="lang-seg lang-seg-en">EN</span>
+      <span class="lang-seg lang-seg-gr">GR</span>
+    </label>
+  </div>
   <div class="cover-inner">
     <div class="eyebrow-v2">
       <span class="eyebrow-v2-org">ODEON</span>
@@ -1921,8 +2015,475 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
 <footer>
   <span>© March 2026 Dr. Mehdi Khaled · All rights reserved</span>
 </footer>
+</div>
+
+<div class="lang-el-root" id="root-el">
+<!-- ════════════════════════════════════════════
+     COVER
+════════════════════════════════════════════ -->
+<div class="cover" id="coverSection-el">
+  <div class="cover-grid"></div>
+  <div class="lang-toggle-wrap">
+    <label class="lang-pill-track" for="lang-switch">
+      <span class="lang-seg lang-seg-en">EN</span>
+      <span class="lang-seg lang-seg-gr">GR</span>
+    </label>
+  </div>
+  <div class="cover-inner">
+    <div class="eyebrow-v2">
+      <span class="eyebrow-v2-org">ODEON</span>
+      <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+    </div>
+
+    <h1 class="cover-title">Αξιολόγηση<br><em>Ικανοτήτων</em><br>Ψηφιακής Υγείας</h1>
+    <p class="cover-subtitle">Η υγειονομική περίθαλψη στην ΕΕ αναδιαμορφώνεται από τη ρύθμιση και την ψηφιακή τεχνολογία — με ταχύτερους ρυθμούς από όσο τα εκπαιδευτικά προγράμματα προλαβαίνουν. Εδώ ανακαλύπτετε πού βρίσκεστε — και τι να κάνετε στη συνέχεια.</p>
+
+    <div class="cover-meta-row">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Τομείς</div>
+        <div class="cover-meta-value">6</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Ερωτήσεις</div>
+        <div class="cover-meta-value">30</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Χρόνος</div>
+        <div class="cover-meta-value">~30'</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Ευθυγράμμιση</div>
+        <div class="cover-meta-value" style="font-size:18px; padding-top:4px;">WHO · EIT Health · EHDS</div>
+      </div>
+    </div>
+
+    <div class="beta-notice">
+      <div class="beta-notice-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0; margin-top:1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Beta Έκδοση &nbsp;·&nbsp; Τα δεδομένα σας είναι ασφαλή</span>
+      </div>
+      <ul class="beta-notice-list">
+        <li>Αυτή είναι μια <strong>beta έκδοση</strong> της αξιολόγησης. Είναι πλήρως λειτουργική.</li>
+        <li>Οι απαντήσεις σας αποθηκεύονται <strong>μόνο στον περιηγητή σας</strong> για τη διάρκεια αυτής της συνεδρίας.</li>
+        <li>Μια <strong>λειτουργία σύνδεσης</strong> θα εισαχθεί σε μελλοντική έκδοση για πιο εξατομικευμένη εμπειρία.</li>
+        <li>Η αξιολόγηση είναι <strong>προσωπική</strong> — τα αποτελέσματά σας είναι ορατά μόνο σε εσάς.</li>
+        <li>Η ODEON χρησιμοποιεί μόνο <strong>πλήρως ανωνυμοποιημένα, συγκεντρωτικά</strong> δεδομένα για αποτύπωση των επιπέδων ψηφιακής ικανότητας οργανισμών.</li>
+        <li>Τα <strong>προσωπικά σας στοιχεία δεν κοινοποιούνται ποτέ</strong> σε τρίτους.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     INFO ACCORDIONS
+════════════════════════════════════════════ -->
+<div class="info-band" id="infoBand-el">
+
+  <!-- Why This Matters -->
+  <div class="accordion-block" id="acc-why-matters-el">
+    <div class="accordion-trigger" onclick="el_toggleInfo('why-matters-el')">
+      <div class="accordion-trigger-left">
+        <div class="accordion-trigger-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <h3>Γιατί αυτό έχει σημασία</h3>
+      </div>
+      <svg class="accordion-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+    </div>
+    <div class="accordion-body">
+      <p>Η Ευρωπαϊκή Ένωση (ΕΕ) έχει, σε διάστημα λίγων ετών, θεσπίσει μερικές από τις πιο κρίσιμες νομοθεσίες για δεδομένα υγείας και τεχνολογία παγκοσμίως — τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR), τον Ευρωπαϊκό Χώρο Δεδομένων Υγείας (EHDS), την Οδηγία Ασφάλειας Δικτύων και Πληροφοριών 2 (NIS2) και τον EU AI Act. Δεν πρόκειται για απομακρυσμένα πολιτικά κείμενα. Διαμορφώνουν ήδη τι αναμένεται από κάθε κλινικό επαγγελματία που εργάζεται σε ένα συνδεδεμένο σύστημα υγείας — και αυτό σημαίνει όλους, ολοένα και περισσότερο.</p>
+      <p>Ταυτόχρονα, οι υπηρεσίες υγείας σε όλη την ΕΕ βρίσκονται υπό πραγματική πίεση να ψηφιοποιηθούν: ηλεκτρονικοί φάκελοι υγείας, τηλεϋγεία, διαγνωστική υποβοηθούμενη από ΤΝ, εξ αποστάσεως παρακολούθηση, διαλειτουργικά δεδομένα ασθενούς. Τα εργαλεία φτάνουν — συχνά πιο γρήγορα από την εκπαίδευση για τη σωστή χρήση τους. Εντός των επόμενων ετών, θα ανοίξει ένα χάσμα απόδοσης μεταξύ κλινικών που μπορούν να εργαστούν με αυτοπεποίθηση και ασφάλεια με ψηφιακά εργαλεία — και αυτών που δεν μπορούν.</p>
+      <p>Οι περισσότεροι κλινικοί επαγγελματίες δεν έχουν λάβει επίσημη εκπαίδευση στην ψηφιακή υγεία. Όχι λόγω έλλειψης δέσμευσης — αλλά επειδή δεν έχει ενσωματωθεί ποτέ συστηματικά στην ιατρική, νοσηλευτική ή συμμαχική εκπαίδευση, όπως οι κλινικές δεξιότητες. Αυτό είναι το χάσμα που η ODEON υπάρχει για να κλείσει.</p>
+      <div class="pull-quote">«Η ψηφιακή επάρκεια δεν είναι τεχνική δεξιότητα για λίγους ειδικούς. Είναι βασική κλινική ικανότητα για κάθε επαγγελματία που ασκεί σε σύγχρονο σύστημα υγείας.»</div>
+      <p>Αυτή η αξιολόγηση δεν προϋποθέτει ότι είστε ειδικός. Είναι σχεδιασμένη για κλινικούς σε κάθε στάδιο — από αυτούς που μόλις αρχίζουν να εμπλέκονται με ψηφιακά εργαλεία, έως αυτούς που ηγούνται ήδη της ψηφιακής αλλαγής. Προσφέρει μια ειλικρινή, δομημένη εικόνα του πού βρίσκεστε — και μια σαφή πορεία προς τα εμπρός.</p>
+    </div>
+  </div>
+
+  <!-- About The Tool -->
+  <div class="accordion-block" id="acc-about-tool-el">
+    <div class="accordion-trigger" onclick="el_toggleInfo('about-tool-el')">
+      <div class="accordion-trigger-left">
+        <div class="accordion-trigger-icon" style="background: var(--teal-mid);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <h3>Σχετικά με την αξιολόγηση</h3>
+      </div>
+      <svg class="accordion-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+    </div>
+    <div class="accordion-body">
+      <p>Βασισμένη σε διεθνώς αναγνωρισμένα πλαίσια — Πλαίσιο Ικανοτήτων Ψηφιακής Υγείας WHO, Μοντέλο Ικανοτήτων EIT Health και επαγγελματικά πρότυπα FEDIP — και θεμελιωμένη στις κανονιστικές απαιτήσεις της ΕΕ: EHDS, EU AI Act, NIS2 και GDPR. Κάθε τομέας και κάθε ερώτηση είναι εξατομικευμένα για το ευρωπαϊκό κλινικό εργατικό δυναμικό. Δεν πρόκειται για γενικό εργαλείο ψηφιακής εγγραμματοσύνης — είναι χτισμένο για κλινικούς που εργάζονται σε ένα ρυθμιζόμενο, ολοένα πιο ψηφιακό ευρωπαϊκό σύστημα υγείας.</p>
+
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--sand); margin: 20px 0 8px;">
+
+        <div style="background: var(--paper); padding: 28px 24px; border-top: 3px solid #cd7f32; display:flex; flex-direction:column; gap:12px;">
+          <img src="https://static.wixstatic.com/media/08b7dd_328c5fbe474046b59f633f1c52d06ad9~mv2.png" alt="Βαθμίδα Αρχικού" style="width:80px; height:80px; object-fit:contain;">
+          <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#cd7f32;">Αρχικό</div>
+          <div style="font-size:16px; font-weight:500; color:var(--ink);">Θεμελίωση Βάσεων</div>
+          <div style="font-size:14px; font-weight:300; color:var(--slate); line-height:1.6;">Ανάπτυξη βασικής επίγνωσης εννοιών, εργαλείων και ευθυνών ψηφιακής υγείας. Έναρξη εφαρμογής τους στην καθημερινή πρακτική.</div>
+          <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--sand); margin-top:4px;">Μέση βαθμολογία &lt; 2,5</div>
+        </div>
+
+        <div style="background: var(--paper); padding: 28px 24px; border-top: 3px solid #808080; display:flex; flex-direction:column; gap:12px;">
+          <img src="https://static.wixstatic.com/media/08b7dd_093e56797d2a4aa591e8dd1a13779031~mv2.png" alt="Βαθμίδα Ενδιάμεσου" style="width:80px; height:80px; object-fit:contain;">
+          <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#808080;">Ενδιάμεσο</div>
+          <div style="font-size:16px; font-weight:500; color:var(--ink);">Αυτόνομη Εφαρμογή</div>
+          <div style="font-size:14px; font-weight:300; color:var(--slate); line-height:1.6;">Εφαρμογή ικανοτήτων ψηφιακής υγείας με αυτοπεποίθηση και αυτονομία στον κλινικό ή διοικητικό σας ρόλο, με λειτουργική γνώση και στους έξι τομείς.</div>
+          <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--sand); margin-top:4px;">Μέση βαθμολογία 2,5 – 3,9</div>
+        </div>
+
+        <div style="background: var(--paper); padding: 28px 24px; border-top: 3px solid var(--gold); display:flex; flex-direction:column; gap:12px;">
+          <img src="https://static.wixstatic.com/media/08b7dd_b1b7cc64cff04f3c8843357ff4be67c0~mv2.png" alt="Βαθμίδα Προχωρημένου" style="width:80px; height:80px; object-fit:contain;">
+          <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);">Προχωρημένο</div>
+          <div style="font-size:16px; font-weight:500; color:var(--ink);">Ηγεσία και Προώθηση Αλλαγής</div>
+          <div style="font-size:14px; font-weight:300; color:var(--slate); line-height:1.6;">Καθοδήγηση συναδέλφων, προώθηση ψηφιακής αλλαγής και ενεργή συμβολή στη διακυβέρνηση και στρατηγική του οργανισμού σας.</div>
+          <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--sand); margin-top:4px;">Μέση βαθμολογία ≥ 4,0</div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 20px; display:grid; grid-template-columns:1fr 1fr; gap: 2px; background: var(--sand);">
+        <div style="background: var(--paper); padding: 24px; border-top: 3px solid #2d6a9f;">
+          <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#2d6a9f; margin-bottom:10px;">Έτος 2 — Προχωρημένο</div>
+          <div style="font-size:15px; font-weight:500; color:var(--ink); margin-bottom:8px;">Εξειδικευμένος Επαγγελματίας</div>
+          <div style="font-size:13px; font-weight:300; color:var(--slate); line-height:1.6;">Εξειδικευμένες διαδρομές ανά τομέα για κλινικούς ηγέτες και ρόλους υλοποίησης ψηφιακής υγείας. Απαιτεί ολοκλήρωση Έτους 1. Καλύπτει: Διακυβέρνηση Δεδομένων, Πρότυπα Διαλειτουργικότητας και Υλοποίηση &amp; Διακυβέρνηση ΤΝ.</div>
+        </div>
+        <div style="background: var(--paper); padding: 24px; border-top: 3px solid #5b3d8a;">
+          <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#5b3d8a; margin-bottom:10px;">Έτος 2 — Επαγγελματικό</div>
+          <div style="font-size:15px; font-weight:500; color:var(--ink); margin-bottom:8px;">Στρατηγικός Ηγέτης</div>
+          <div style="font-size:13px; font-weight:300; color:var(--slate); line-height:1.6;">Πιστοποίηση στρατηγικού και διακυβερνητικού επιπέδου για επικεφαλής τμημάτων και ηγέτες ψηφιακής υγείας. Καλύπτει: Στρατηγική Ψηφιακής Υγείας, Ηγεσία Κυβερνοασφάλειας και Μεθόδους Έρευνας Ψηφιακής Υγείας.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- The Six Domains -->
+  <div class="accordion-block accordion-block--open" id="acc-six-domains-el">
+    <div class="accordion-trigger" onclick="el_toggleInfo('six-domains-el')">
+      <div class="accordion-trigger-left">
+        <div class="accordion-trigger-icon" style="background: var(--gold);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+        </div>
+        <h3>Οι Έξι Τομείς Ικανοτήτων</h3>
+      </div>
+      <svg class="accordion-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+    </div>
+    <div class="accordion-body" id="six-domains-body-el" style="display:block;">
+      <p style="margin-bottom: 20px;">Πέντε ερωτήσεις ανά τομέα. Καθεμία αντιστοιχεί σε συγκεκριμένη κανονιστική υποχρέωση ΕΕ ή πλαίσιο ικανοτήτων.</p>
+      <div id="domainCardsGrid-el" style="display:grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--sand); margin-bottom:8px;"></div>
+    </div>
+  </div>
+
+</div><!-- /info-band -->
+
+<!-- Assessment levels band — replaces the old domain strip -->
+<div class="domains-strip">
+  <div style="max-width: 960px; margin: 0 auto; padding: 28px 40px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color: rgba(255,255,255,0.5); margin-bottom:20px;">Επίπεδα Αξιολόγησης — Έτος 1</div>
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap: 24px;">
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color: #cd7f32; margin-bottom:6px;">Αρχικό</div>
+        <div style="font-size:14px; font-weight:400; color: rgba(255,255,255,0.85); line-height:1.45;">Θεμελίωση βασικής επίγνωσης και στους έξι τομείς. Σημείο εισόδου για όλους τους εκπαιδευόμενους.</div>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color: #b0b8c0; margin-bottom:6px;">Ενδιάμεσο</div>
+        <div style="font-size:14px; font-weight:400; color: rgba(255,255,255,0.85); line-height:1.45;">Εφαρμογή ικανοτήτων με αυτοπεποίθηση και αυτονομία στον καθημερινό κλινικό σας ρόλο.</div>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color: var(--gold-light); margin-bottom:6px;">Προχωρημένο</div>
+        <div style="font-size:14px; font-weight:400; color: rgba(255,255,255,0.85); line-height:1.45;">Καθοδήγηση συναδέλφων, προώθηση ψηφιακής αλλαγής και συμβολή στη διακυβέρνηση και στρατηγική.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PERSONAL INFO FORM
+════════════════════════════════════════════ -->
+<div class="form-section" id="personalInfoSection-el">
+  <div class="container">
+    <div class="form-intro">
+      <div class="section-label">Βήμα 01 — Τα Στοιχεία σας</div>
+      <h2>Πριν ξεκινήσουμε</h2>
+      <p>Οι απαντήσεις σας είναι εμπιστευτικές και χρησιμοποιούνται μόνο για τη δημιουργία των εξατομικευμένων αποτελεσμάτων σας. Όλα τα πεδία είναι υποχρεωτικά.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Όνομα <span class="required">*</span></label>
+        <input type="text" id="givenName-el" oninput="el_clearFieldError('givenName')" name="given-name" autocomplete="given-name" placeholder="Όνομα">
+      </div>
+      <div class="form-group">
+        <label>Επώνυμο <span class="required">*</span></label>
+        <input type="text" id="familyName-el" oninput="el_clearFieldError('familyName')" name="family-name" autocomplete="family-name" placeholder="Επώνυμο">
+      </div>
+      <div class="form-group full">
+        <label>Διεύθυνση Email <span class="required">*</span></label>
+        <input type="email" id="email-el" oninput="el_clearFieldError('email')" name="email" autocomplete="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group full">
+        <label>Επάγγελμα <span class="required">*</span></label>
+        <select id="profession-el" onchange="el_clearFieldError('profession')" name="profession">
+          <option value="">Επιλέξτε το επάγγελμά σας...</option>
+          <option value="Academic / Educator / Researcher">Ακαδημαϊκός / Εκπαιδευτικός / Ερευνητής</option>
+          <option value="Account Manager / Business Development / Sales">Account Manager / Business Development / Sales</option>
+          <option value="Allied Health / Dental">Επαγγελματίας Συμμαχικών Επαγγελμάτων / Οδοντιατρικής</option>
+          <option value="Business Analyst">Business Analyst</option>
+          <option value="CCIO / CMIO / CNIO / CXIO">CCIO / CMIO / CNIO / CXIO</option>
+          <option value="CEO / GM / MD">CEO / GM / MD</option>
+          <option value="CIO / CTO">CIO / CTO</option>
+          <option value="Consultant">Σύμβουλος</option>
+          <option value="COO / Operations Manager">COO / Operations Manager</option>
+          <option value="Data Analyst / Data Scientist">Αναλυτής Δεδομένων / Data Scientist</option>
+          <option value="Digital Health Lead / Strategy Manager">Υπεύθυνος Ψηφιακής Υγείας / Strategy Manager</option>
+          <option value="Finance / Procurement">Οικονομικά / Προμήθειες</option>
+          <option value="Founder / Start-up">Ιδρυτής / Start-up</option>
+          <option value="Govt Employee / Public Servant">Κρατικός Υπάλληλος / Δημόσιος Λειτουργός</option>
+          <option value="Health Informatician">Ειδικός Πληροφορικής Υγείας</option>
+          <option value="Health Information Manager (HIM)">Health Information Manager (HIM)</option>
+          <option value="Manager / Head of Department">Διευθυντής / Επικεφαλής Τμήματος</option>
+          <option value="Midwife">Μαία</option>
+          <option value="Nurse">Νοσηλευτής / Νοσηλεύτρια</option>
+          <option value="Pharmacist">Φαρμακοποιός</option>
+          <option value="Physician / General Practitioner">Ιατρός / Γενικός Ιατρός</option>
+          <option value="Program Manager / Product Manager">Program Manager / Product Manager</option>
+          <option value="Project Manager / Project Officer">Project Manager / Project Officer</option>
+          <option value="Student">Φοιτητής</option>
+          <option value="Other Health Professional">Άλλος Επαγγελματίας Υγείας</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ομάδα / Μονάδα <span class="required">*</span></label>
+        <input type="text" id="teamName-el" oninput="el_clearFieldError('teamName')" name="team-name" autocomplete="organization" placeholder="Όνομα ομάδας ή μονάδας">
+      </div>
+      <div class="form-group">
+        <label>Όνομα Οργανισμού <span class="required">*</span></label>
+        <input type="text" id="organisationName-el" oninput="el_clearFieldError('organisationName')" name="organization" autocomplete="organization" placeholder="Όνομα οργανισμού">
+      </div>
+      <div class="form-group">
+        <label>Πόλη <span class="required">*</span></label>
+        <input type="text" id="city-el" oninput="el_clearFieldError('city')" name="city" autocomplete="address-level2" placeholder="Πόλη">
+      </div>
+      <div class="form-group">
+        <label>Χώρα <span class="required">*</span></label>
+        <select id="country-el" onchange="el_clearFieldError('country')" name="country" autocomplete="country-name">
+          <option value="">Επιλέξτε τη χώρα σας...</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+          <option value="Andorra">Andorra</option>
+          <option value="Angola">Angola</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Azerbaijan">Azerbaijan</option>
+          <option value="Bahrain">Bahrain</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Cambodia">Cambodia</option>
+          <option value="Canada">Canada</option>
+          <option value="Chile">Chile</option>
+          <option value="China">China</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Croatia">Croatia</option>
+          <option value="Cyprus">Cyprus</option>
+          <option value="Czech Republic">Czech Republic</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Egypt">Egypt</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Germany">Germany</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Greece">Greece</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Iceland">Iceland</option>
+          <option value="India">India</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Israel">Israel</option>
+          <option value="Italy">Italy</option>
+          <option value="Japan">Japan</option>
+          <option value="Jordan">Jordan</option>
+          <option value="Kazakhstan">Kazakhstan</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Korea, South">Korea, South</option>
+          <option value="Kuwait">Kuwait</option>
+          <option value="Latvia">Latvia</option>
+          <option value="Lebanon">Lebanon</option>
+          <option value="Libya">Libya</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Malta">Malta</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Mongolia">Mongolia</option>
+          <option value="Morocco">Morocco</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="North Macedonia">North Macedonia</option>
+          <option value="Norway">Norway</option>
+          <option value="Oman">Oman</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Palestine">Palestine</option>
+          <option value="Philippines">Philippines</option>
+          <option value="Poland">Poland</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Qatar">Qatar</option>
+          <option value="Romania">Romania</option>
+          <option value="Russia">Russia</option>
+          <option value="Rwanda">Rwanda</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="Serbia">Serbia</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Spain">Spain</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Syria">Syria</option>
+          <option value="Taiwan">Taiwan</option>
+          <option value="Tanzania">Tanzania</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Tunisia">Tunisia</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Uganda">Uganda</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="United Arab Emirates">United Arab Emirates</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+          <option value="Uzbekistan">Uzbekistan</option>
+          <option value="Vietnam">Vietnam</option>
+          <option value="Yemen">Yemen</option>
+          <option value="Zambia">Zambia</option>
+          <option value="Zimbabwe">Zimbabwe</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-top: 36px;">
+      <button class="btn btn-gold" onclick="el_startAssessment()">Έναρξη Αξιολόγησης →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ASSESSMENT SECTION
+════════════════════════════════════════════ -->
+<div id="assessmentSection-el" class="hidden">
+
+  <!-- Assessment Start Header -->
+  <div class="assessment-start-header">
+    <div class="assessment-start-header-inner">
+      <div class="eyebrow-v2">
+        <span class="eyebrow-v2-org">ODEON</span>
+        <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+        <span class="eyebrow-v2-badge">Εργαλείο Αυτοαξιολόγησης</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Integrity Notice -->
+  <div class="integrity-notice">
+    <div class="integrity-notice-inner">
+      <div class="integrity-notice-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8d08a" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-light); margin-bottom:8px;">Σημαντική Σημείωση — Ακεραιότητα Αξιολόγησης</div>
+        <p style="font-size:15px; font-weight:400; color:rgba(255,255,255,0.9); line-height:1.65; margin-bottom:8px;">Οι βαθμολογίες και τα αποτελέσματά σας είναι <strong style="color:white;">ορατά μόνο σε εσάς</strong>, εκτός αν επιλέξετε να τα κοινοποιήσετε. Κανείς άλλος — ούτε ο εργοδότης σας, η ομάδα σας ή η Ακαδημία — δεν έχει πρόσβαση στις ατομικές σας απαντήσεις.</p>
+        <p style="font-size:14px; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.6; margin:0;">Για το δικό σας επαγγελματικό όφελος, σας προτρέπουμε να απαντάτε σε κάθε ερώτηση με ειλικρίνεια — αποτυπώνοντας τις πραγματικές, καθημερινές σας ικανότητες και όχι τις φιλοδοξίες σας. Τα πιο χρήσιμα αποτελέσματα είναι τα πιο ακριβή.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-band" id="progressBand-el">
+    <div class="progress-inner">
+      <div class="progress-label">Πρόοδος</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill-el"></div>
+      </div>
+      <div class="progress-label"><strong id="progressText-el">0 από 6 τομείς</strong></div>
+    </div>
+  </div>
+
+  <!-- Domain sections injected here -->
+  <div id="domainsContainer-el"></div>
+
+</div>
+
+<!-- ════════════════════════════════════════════
+     RESULTS SECTION
+════════════════════════════════════════════ -->
+<div id="resultsSection-el" class="results-section">
+
+  <div class="results-hero">
+    <div class="cover-grid"></div>
+    <div class="results-hero-inner">
+      <div>
+        <div class="eyebrow-v2">
+          <span class="eyebrow-v2-org">ODEON</span>
+          <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+          <span id="resultsSATBadge-el">Αυτοαξιολόγηση | Συνολικό</span>
+        </div>
+        <h1 class="results-name" id="userNameDisplay-el"></h1>
+        <div class="results-date" id="completionDate-el"></div>
+      </div>
+      <div class="results-badge-wrap">
+        <img id="badgeImage-el" class="results-badge-img" src="" alt="Βαθμίδα Επίτευξης">
+      </div>
+    </div>
+  </div>
+
+  <div class="results-domains">
+    <div class="results-domains-inner">
+      <div class="section-label" style="font-size:13px; letter-spacing:0.26em;">Ανάλυση Τομέων</div>
+      <h2 style="font-size:clamp(36px, 4vw, 52px); margin-bottom:36px;">Τα Αποτελέσματά σας σε Όλους τους Έξι Τομείς</h2>
+      <div class="domain-results-grid" id="domainResultsGrid-el"></div>
+    </div>
+  </div>
+
+  <div class="results-cta">
+    <div class="results-cta-inner">
+      <div>
+        <div class="section-label" style="color: var(--gold-light); opacity: 0.7;">Επόμενα Βήματα</div>
+        <h2 style="color: white; margin-bottom: 6px;">Αξιοποιήστε τα αποτελέσματά σας</h2>
+        <p>Το προφίλ ικανοτήτων σας αντιστοιχίζεται άμεσα σε ενότητες της Ακαδημίας σχεδιασμένες για το επίπεδό σας. Κάθε τομέας έχει εξατομικευμένη μαθησιακή διαδρομή — από τα θεμέλια του Αρχικού έως τις ηγετικές διαδρομές του Προχωρημένου.</p>
+      </div>
+      <div class="results-cta-actions">
+        <button class="btn btn-gold" onclick="el_viewRelevantCourses()">Δείτε τα Σχετικά Μαθήματα →</button>
+        <button class="btn btn-ghost" onclick="el_retakeAssessment()">Επαναλάβετε την Αξιολόγηση</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <span>© Μάρτιος 2026 Dr. Mehdi Khaled · Με επιφύλαξη παντός δικαιώματος</span>
+</footer>
+</div>
 
 <script>
+
 // ─────────────────────────────────────────────────────────────
 // ASSESSMENT DATA  (v8 curriculum — EU edition — acronyms expanded)
 // ─────────────────────────────────────────────────────────────
@@ -2179,6 +2740,7 @@ function startAssessment() {
   const strip = document.querySelector('.domains-strip');
   if (strip) strip.classList.add('hidden');
   document.getElementById('assessmentSection').classList.remove('hidden');
+  document.getElementById('root-en').classList.add('in-assessment');
 
   // Open domain 1
   document.getElementById('domain1Content').classList.add('active');
@@ -2355,6 +2917,7 @@ function updateProgress() {
 // ─── SHOW RESULTS ─────────────────────────────────────────────
 function showResults() {
   document.getElementById('assessmentSection').classList.add('hidden');
+  document.getElementById('root-en').classList.remove('in-assessment');
   const resultsEl = document.getElementById('resultsSection');
   resultsEl.classList.add('active');
   requestAnimationFrame(function() {
@@ -2436,7 +2999,9 @@ function retakeAssessment() {
   document.getElementById('progressFill').style.width='0%';
   document.getElementById('progressText').textContent='0 of 6 domains';
   document.getElementById('resultsSection').classList.remove('active');
+  document.getElementById('root-en').classList.add('in-assessment');
   document.getElementById('assessmentSection').classList.remove('hidden');
+  document.getElementById('root-en').classList.add('in-assessment');
   document.getElementById('domain1Content').classList.add('active');
   document.getElementById('domain1StatusBadge').textContent='In Progress';
   document.getElementById('domain1StatusBadge').classList.add('in-progress');
@@ -2457,6 +3022,572 @@ setInterval(() => {
   catch(e) {}
 }, 30000);
 
+
 </script>
+
+<script>
+
+// ─────────────────────────────────────────────────────────────
+// ASSESSMENT DATA  (v8 curriculum — EU edition — acronyms expanded)
+// ─────────────────────────────────────────────────────────────
+const el_assessmentData = [
+  {
+    name: "Τομέας Α: Ψηφιακός Επαγγελματισμός και Ηθική",
+    goal: "Οι επαγγελματίες υγείας τηρούν επαγγελματικά πρότυπα, ηθική συμπεριφορά και κανονιστική συμμόρφωση σε ψηφιακά περιβάλλοντα.",
+    context: "Ο ψηφιακός επαγγελματισμός δεν αφορά μόνο τον τρόπο χρήσης της τεχνολογίας — αφορά τις αξίες και την κρίση που φέρνετε σε αυτήν. Σε κλινικό πλαίσιο, αυτό σημαίνει προστασία της ιδιωτικότητας ασθενούς, υπεύθυνη διαδικτυακή συμπεριφορά, κατανόηση των νομικών σας υποχρεώσεων και αναγνώριση ότι κάθε ψηφιακή πράξη αφήνει ίχνος. Ο τομέας αυτός αφορά επίσης την ισότητα: δεν έχουν όλοι οι ασθενείς ίση πρόσβαση στα ψηφιακά εργαλεία, και το να είστε ψηφιακά ικανός κλινικός σημαίνει να το αναγνωρίζετε και να ανταποκρίνεστε σε αυτό.",
+    letter: "Α", letterClass: "da",
+    questions: [
+      { code:"A1", statement:"Αναπτύσσω ενεργά τις ικανότητές μου στην ψηφιακή υγεία μέσω συνεχούς μάθησης και συνεχιζόμενης επαγγελματικής ανάπτυξης (CPD) — προς όφελος του ρόλου μου και των ασθενών μου.", keyPoints:"• Αναζητώ ευκαιρίες CPD και CME σχετικές με εργαλεία και καινοτομίες ψηφιακής υγείας\n• Υιοθετώ νέες ψηφιακές τεχνολογίες που εισάγονται στον χώρο εργασίας μου\n• Ενημερώνομαι μέσω επαγγελματικών φορέων, περιοδικών και πόρων της Ακαδημίας\n• Αναστοχάζομαι πώς οι ψηφιακές μου δεξιότητες βελτιώνουν άμεσα την ποιότητα φροντίδας" },
+      { code:"A2", statement:"Συμμορφώνομαι με τη νομοθεσία, τους επαγγελματικούς κώδικες και την οργανωσιακή πολιτική για την ψηφιακή υγεία και τα δεδομένα, συμπεριλαμβανομένων των υποχρεώσεων GDPR για ιδιωτικότητα και συναίνεση ασθενούς.", keyPoints:"• Ακολουθώ τις πολιτικές και κώδικες δεοντολογίας ψηφιακής υγείας του οργανισμού μου\n• Γνωρίζω τις υποχρεώσεις ιδιωτικότητας και συναίνεσης (GDPR, Άρθρο 5)\n• Κατανοώ τις συνέπειες παραβίασης κανόνων ιδιωτικότητας — προσωπική και οργανωσιακή ευθύνη\n• Αναφέρω πιθανές παραβιάσεις μέσω της ορισμένης διαδικασίας του οργανισμού μου" },
+      { code:"A3", statement:"Γνωρίζω τις πολιτισμικές, ηθικές και κοινωνικοοικονομικές διαστάσεις της ψηφιακής υγείας και λαμβάνω υπόψη την ισότητα πρόσβασης κατά την παροχή ψηφιακών υπηρεσιών.", keyPoints:"• Αναγνωρίζω ότι δεν έχουν όλοι οι ασθενείς ίση πρόσβαση — ηλικία, γλώσσα, αναπηρία, συνδεσιμότητα\n• Λαμβάνω υπόψη ισότητα πρόσβασης κατά τη σύσταση ψηφιακών υπηρεσιών\n• Είμαι ευαίσθητος στις πολιτισμικές και ηθικές διαφορές ως προς την ψηφιακή υγεία\n• Υπερασπίζομαι τον χωρίς αποκλεισμούς σχεδιασμό στον οργανισμό μου" },
+      { code:"A4", statement:"Διατηρώ κατάλληλη επαγγελματική διαδικτυακή παρουσία και κατανοώ ότι η ψηφιακή μου συμπεριφορά — συμπεριλαμβανομένων των μέσων κοινωνικής δικτύωσης — αντικατοπτρίζει το επάγγελμά μου και την εμπιστοσύνη του κοινού στην υγεία.", keyPoints:"• Διατηρώ ενημερωμένο επαγγελματικό προφίλ σε σχετικές πλατφόρμες\n• Θυμάμαι ότι ακόμη και ιδιωτικές αναρτήσεις μπορούν να επηρεάσουν μόνιμα την επαγγελματική μου υπόσταση\n• Ενεργώ διαδικτυακά σύμφωνα με τον κώδικα δεοντολογίας του επαγγελματικού μου φορέα\n• Δεν κοινοποιώ ποτέ περιεχόμενο σχετικό με ασθενείς — ακόμη και ανωνυμοποιημένες περιπτώσεις μπορούν να αναγνωριστούν" },
+      { code:"A5", statement:"Κατανοώ τις ηθικές διαστάσεις της ψηφιακής υγείας — συμπεριλαμβανομένης της υπεύθυνης χρήσης περιεχομένου τεχνητής νοημοσύνης (ΤΝ) — και εφαρμόζω συνεπή επαγγελματικά πρότυπα σε όλους τους ψηφιακούς χώρους.", keyPoints:"• Γνωρίζω τους κινδύνους ακρίβειας και μεροληψίας κατά κοινοποίηση περιεχομένου ΤΝ\n• Εφαρμόζω τα ίδια πρότυπα διαδικτυακά και πρόσωπο με πρόσωπο\n• Αντιμετωπίζω την ψηφιακή συμπεριφορά ως κοινή ευθύνη ομάδας\n• Λαμβάνω υπόψη τον αντίκτυπο στην εμπιστοσύνη του κοινού στους φορείς υγείας" }
+    ]
+  },
+  {
+    name: "Τομέας Β: Ηγεσία και Μετασχηματισμός στην Ψηφιακή Υγεία",
+    goal: "Οι επαγγελματίες υγείας υπερασπίζονται τους ασθενείς, προωθούν την υπεύθυνη χρήση ψηφιακής υγείας και εμπλέκονται με την πολιτική ψηφιακής υγείας της ΕΕ και την οργανωσιακή στρατηγική.",
+    context: "Η ηγεσία στην ψηφιακή υγεία δεν είναι αποκλειστικό προνόμιο διευθυντών ή υπεύθυνων πληροφορικής. Κάθε κλινικός που υποστηρίζει ένα καλύτερο σύστημα, υπερασπίζεται το δικαίωμα ενός ασθενούς να έχει πρόσβαση στα αρχεία του ή αμφισβητεί ένα κακά σχεδιασμένο ψηφιακό εργαλείο, ασκεί ψηφιακή ηγεσία. Στο πλαίσιο της ΕΕ, αυτό σημαίνει επίσης κατανόηση του πολιτικού περιβάλλοντος — του EHDS, των εθνικών στρατηγικών eHealth και των δικαιωμάτων που παρέχουν αυτά τα πλαίσια σε ασθενείς και επαγγελματίες.",
+    letter: "Β", letterClass: "db",
+    questions: [
+      { code:"B1", statement:"Υπερασπίζομαι το δικαίωμα των ασθενών να έχουν ψηφιακή πρόσβαση στις πληροφορίες υγείας τους και τους στηρίζω στη χρήση ψηφιακών υπηρεσιών για συμμετοχή στη φροντίδα τους.", keyPoints:"• Γνωρίζω τις διαθέσιμες ψηφιακές υπηρεσίες — πύλες, EU Patient Summary, ηλεκτρονική συνταγογράφηση\n• Στηρίζω ασθενείς στην πρόσβαση στα αρχεία τους (EHDS· GDPR, Άρθρο 15)\n• Αντιμετωπίζω εμπόδια ψηφιακής εγγραμματοσύνης\n• Διασφαλίζω ότι ασθενείς ενημερώνονται για τη χρήση ΤΝ στη φροντίδα τους" },
+      { code:"B2", statement:"Κατανοώ τα οφέλη και τους κινδύνους των τεχνολογιών ψηφιακής υγείας και προωθώ την κατάλληλη, υπεύθυνη χρήση τους στον χώρο εργασίας μου.", keyPoints:"• Αξιολογώ κάθε εργαλείο ψηφιακής υγείας: βελτιώνει τη φροντίδα; Τι επιπτώσεις στην ιδιωτικότητα;\n• Κατανοώ τους κινδύνους μη εγκεκριμένων εργαλείων σε κλινικά περιβάλλοντα\n• Υπερασπίζομαι υιοθέτηση βάσει αποδεικτικών στοιχείων\n• Εκφράζω ανησυχίες για εργαλεία που δεν πληρούν επαγγελματικά ή κανονιστικά πρότυπα" },
+      { code:"B3", statement:"Προωθώ την ψηφιακή υγεία στον χώρο εργασίας μου — ενθαρρύνω συναδέλφους να εμπλακούν εποικοδομητικά με την ψηφιακή αλλαγή και συμβάλλω σε κουλτούρα συνεχούς βελτίωσης.", keyPoints:"• Εντοπίζω τομείς όπου ψηφιακές λύσεις βελτιώνουν αποδοτικότητα, ασφάλεια ή εμπειρία ασθενούς\n• Ενθαρρύνω τους συναδέλφους να εμπλακούν θετικά αντί να αντιστέκονται\n• Παρέχω εποικοδομητική ανατροφοδότηση μέσω των διαδικασιών αξιολόγησης\n• Στηρίζω συναδέλφους που δυσκολεύονται — καθοδήγηση και αμοιβαία υποστήριξη έχουν σημασία" },
+      { code:"B4", statement:"Εξερευνώ αναδυόμενες ψηφιακές τεχνολογίες και εμπλέκομαι με στρατηγική και ανάπτυξη πολιτικής σχετικής με τον ρόλο και το περιβάλλον μου.", keyPoints:"• Ερευνώ καινοτομίες ψηφιακής υγείας στην ειδικότητά μου\n• Εμπλέκομαι με τη στρατηγική ψηφιακής υγείας του οργανισμού μου\n• Εξοικειώνομαι με τον Ευρωπαϊκό Χώρο Δεδομένων Υγείας (EHDS) και τις επιπτώσεις του\n• Συμβάλλω σε διαβουλεύσεις πολιτικής μέσω της επαγγελματικής μου ένωσης" },
+      { code:"B5", statement:"Συμμετέχω ενεργά στην ψηφιακή αλλαγή — υιοθετώ νέα συστήματα, στηρίζω συναδέλφους κατά τη μετάβαση και συμβάλλω στην αξιολόγηση και διακυβέρνηση ψηφιακών εργαλείων.", keyPoints:"• Παρακολουθώ όλα τα ψηφιακά συστήματα στον χώρο εργασίας μου\n• Εμπλέκομαι με την αλλαγή: εκπαίδευση, pilots, ανατροφοδότηση\n• Στηρίζω συναδέλφους κατά τις μεταβάσεις συστημάτων\n• Συμμετέχω στη διακυβέρνηση ψηφιακής υγείας: επιτροπές, αναθεώρηση πολιτικών, βελτίωση ποιότητας" }
+    ]
+  },
+  {
+    name: "Τομέας Γ: Ποιότητα Δεδομένων και Διακυβέρνηση Πληροφορίας",
+    goal: "Οι επαγγελματίες υγείας καταγράφουν ακριβή δεδομένα υγείας, κατανοούν πώς αυτά διακυβερνώνται και χρησιμοποιούνται, και αντιμετωπίζουν την ποιότητα δεδομένων ως υποχρέωση ασφάλειας ασθενούς.",
+    context: "Κάθε φορά που εισάγετε δεδομένα σε ένα κλινικό σύστημα, συμβάλλετε σε κάτι πολύ μεγαλύτερο από ένα μεμονωμένο αρχείο ασθενούς. Αυτά τα δεδομένα τροφοδοτούν κλινικές αποφάσεις, αναφορές τμήματος, εθνικούς δείκτες υγείας και έρευνα. Τα σφάλματα συσσωρεύονται. Τα καλά δεδομένα ξεκινούν από το σημείο εισαγωγής — και αυτός είστε εσείς. Ο τομέας καλύπτει επίσης τη διακυβέρνηση: κατανόηση δικαιωμάτων δεδομένων ασθενούς, τι απαιτεί ο GDPR στην πράξη και πώς χρησιμοποιούνται τα δεδομένα υγείας πέρα από την κλίνη.",
+    letter: "Γ", letterClass: "dc",
+    questions: [
+      { code:"C1", statement:"Αναλαμβάνω την ευθύνη για την καταγραφή ακριβών, πλήρων και έγκαιρων δεδομένων υγείας, κατανοώντας ότι η ποιότητα δεδομένων αποτελεί άμεση υποχρέωση ασφάλειας ασθενούς.", keyPoints:"• Γνωρίζω πώς να χρησιμοποιώ σωστά όλα τα κλινικά και διοικητικά συστήματα\n• Κατανοώ ότι ανακριβή δεδομένα βλάπτουν την ασφάλεια ασθενούς και τις αποφάσεις φροντίδας\n• Εφαρμόζω συνεπή προσέγγιση για ελαχιστοποίηση σφαλμάτων εισαγωγής\n• Κατανοώ πώς τα δεδομένα μου τροφοδοτούν μεταγενέστερες κλινικές αποφάσεις" },
+      { code:"C2", statement:"Κατανοώ ορολογία ψηφιακής υγείας σχετική με την καταγραφή, διακυβέρνηση και χρήση δεδομένων, και την εφαρμόζω στην καθημερινή πράξη.", keyPoints:"• Γνωρίζω βασικούς όρους: Ηλεκτρονικός Φάκελος Υγείας (EHR), διαλειτουργικότητα, ελαχιστοποίηση δεδομένων, ψευδωνυμοποίηση\n• Κατανοώ πρότυπα κωδικοποίησης (ICD-11, SNOMED CT)\n• Γνωρίζω τη διαφορά μεταξύ δεδομένων, πληροφοριών και γνώσης\n• Παραμένω ενημερωμένος μέσω επαγγελματικών δικτύων και πόρων Ακαδημίας" },
+      { code:"C3", statement:"Κατανοώ πώς τα δεδομένα υγείας ρέουν στο σύστημα — από το σημείο καταγραφής έως την αναφορά ποιότητας, τους κλινικούς ελέγχους και τη βελτίωση υπηρεσιών.", keyPoints:"• Γνωρίζω πού πηγαίνουν τα δεδομένα μόλις καταγραφούν — τοπικό αρχείο, εθνικό μητρώο, ανωνυμοποιημένη αναφορά\n• Κατανοώ πώς τα δεδομένα μου τροφοδοτούν ταμπλό ποιότητας και κλινικούς ελέγχους\n• Γνωρίζω τη διαφορά πρωτογενούς χρήσης (άμεση φροντίδα) και δευτερογενούς χρήσης\n• Κατανοώ τις πολιτικές διατήρησης δεδομένων (GDPR, εθνική νομοθεσία)" },
+      { code:"C4", statement:"Αναγνωρίζω πώς τα ακριβή, δομημένα δεδομένα πληροφορούν αποφάσεις σε κάθε επίπεδο — και κατανοώ ότι τα κακής ποιότητας δεδομένα παράγουν άμεσα κακής ποιότητας αποτελέσματα.", keyPoints:"• Κατανοώ πώς πολλαπλές πηγές δεδομένων παράγουν κλινικές και λειτουργικές πληροφορίες\n• Διαβάζω απλά ταμπλό και εξάγω σχετικά συμπεράσματα\n• Αναγνωρίζω πότε ανωμαλίες δεδομένων υποδηλώνουν ζήτημα ποιότητας ή ασφάλειας\n• Γνωρίζω ότι κακά δεδομένα = κακά αποτελέσματα σε επίπεδο ασθενούς, ομάδας και συστήματος" },
+      { code:"C5", statement:"Κατανοώ τα οφέλη και τους περιορισμούς των δεδομένων που παράγονται από ασθενείς και γνωρίζω πώς να τα αξιολογώ και να τα ενσωματώνω κατάλληλα στη φροντίδα.", keyPoints:"• Γνωρίζω πηγές δεδομένων ασθενούς: wearables, εφαρμογές, οικιακοί μετρητές, ημερολόγια\n• Αξιολογώ προσεκτικά καταναλωτικές συσκευές — χαμηλότερα πρότυπα ακρίβειας\n• Κατανοώ πώς να ενσωματώνω δεδομένα ασθενούς κατάλληλα στο σχέδιο φροντίδας\n• Γνωρίζω ότι ασθενείς έχουν δικαιώματα GDPR για πρόσβαση, διόρθωση και κοινοποίηση" }
+    ]
+  },
+  {
+    name: "Τομέας Δ: Ανθρωποκεντρική Ψηφιακή Παροχή Φροντίδας",
+    goal: "Οι επαγγελματίες υγείας χρησιμοποιούν ψηφιακά εργαλεία για την παροχή ασφαλούς, ανθρωποκεντρικής φροντίδας — συμπεριλαμβανομένης υποστήριξης κλινικών αποφάσεων, τηλεϋγείας και διασυνοριακού συντονισμού ΕΕ.",
+    context: "Τα ψηφιακά εργαλεία αλλάζουν τον τρόπο — και ολοένα περισσότερο τον τόπο — παροχής φροντίδας. Τηλεϋγεία, εξ αποστάσεως παρακολούθηση, διαγνωστική υποβοηθούμενη από ΤΝ και πύλες ασθενών αποτελούν πλέον μέρος της καθημερινής κλινικής πρακτικής. Ο τομέας καλύπτει τη χρήση αυτών των εργαλείων με ασφάλεια και αποτελεσματικότητα: κριτική αξιολόγηση εξόδων υποστήριξης κλινικών αποφάσεων, υποστήριξη ασθενών μέσω ψηφιακών υπηρεσιών και — στο πλαίσιο ΕΕ — διασυνοριακός συντονισμός φροντίδας.",
+    letter: "Δ", letterClass: "dd",
+    questions: [
+      { code:"D1", statement:"Κατανοώ πώς η σύνδεση δεδομένων υγείας από διαφορετικές πηγές δημιουργεί μια πιο πλήρη εικόνα του ασθενούς — και τους κινδύνους ιδιωτικότητας και ακρίβειας που συνεπάγεται.", keyPoints:"• Γνωρίζω πώς τα κλινικά συστήματα μοιράζονται δεδομένα για συνδεδεμένο αρχείο υγείας (GP, νοσοκομείο, φαρμακείο)\n• Κατανοώ ότι η σύνδεση δεδομένων βελτιώνει τη συνέχεια αλλά εισάγει κινδύνους ιδιωτικότητας\n• Γνωρίζω ότι σφάλματα ενισχύονται όταν δεδομένα συγκεντρώνονται από πολλά συστήματα\n• Γνωρίζω τις απαιτήσεις συναίνεσης (GDPR)" },
+      { code:"D2", statement:"Αξιολογώ κριτικά ψηφιακά εργαλεία και πηγές δεδομένων — συμπεριλαμβανομένων εξόδων υποστήριξης κλινικών αποφάσεων — και εφαρμόζω επαγγελματική κρίση πριν δράσω.", keyPoints:"• Αξιολογώ εξόδους υποστήριξης κλινικών αποφάσεων — ελέγχω αποδεικτικά στοιχεία πριν δράσω\n• Τα εργαλεία υποστήριξης βοηθούν — δεν αντικαθιστούν — την κλινική κρίση\n• Αξιολογώ κριτικά δεδομένα ασθενούς (wearables, εφαρμογές)\n• Γνωρίζω για SaMD (Λογισμικό ως Ιατροτεχνολογικό Προϊόν) βάσει EU MDR Κανόνας 11 — ρωτώ αν τα εργαλεία είναι πιστοποιημένα" },
+      { code:"D3", statement:"Κατανοώ πώς η ανάλυση δεδομένων πληροφορεί κλινικές αποφάσεις και βελτίωση υπηρεσιών, και γνωρίζω πώς να εκφράσω ανησυχίες όταν τα αναλυτικά στοιχεία έρχονται σε αντίθεση με τις παρατηρήσεις μου.", keyPoints:"• Κατανοώ ότι τα δεδομένα μου συμβάλλουν σε ευρύτερα κλινικά αναλυτικά στοιχεία\n• Διαβάζω και ερμηνεύω βασικά κλινικά ταμπλό\n• Αναγνωρίζω πώς δεδομένα πληροφορούν αλλαγές υπηρεσιών και βελτίωση ποιότητας\n• Γνωρίζω πώς να εκφράσω ανησυχίες όταν αναλυτικά στοιχεία φαίνονται ασυνεπή" },
+      { code:"D4", statement:"Αξιολογώ πώς οι ψηφιακές τεχνολογίες υποστηρίζουν νέα μοντέλα φροντίδας και βελτιώνουν την εμπειρία ασθενούς, και συμβάλλω ενεργά στην υλοποίηση ψηφιακών υπηρεσιών.", keyPoints:"• Εξερευνώ πώς ψηφιακά εργαλεία αλλάζουν την παροχή φροντίδας στην ειδικότητά μου\n• Αξιολογώ εργαλεία από την οπτική του ασθενούς: βελτιώνουν πραγματικά εμπειρία και πρόσβαση;\n• Στηρίζω υλοποίηση νέων ψηφιακών υπηρεσιών — συμμετέχω σε pilots και αξιολογήσεις\n• Γνωρίζω τις διασυνοριακές ψηφιακές υπηρεσίες ΕΕ για ασθενείς (EU Patient Summary, e-prescription)" },
+      { code:"D5", statement:"Αξιολογώ τον αντίκτυπο της ψηφιακής υγείας στους ασθενείς, τους επαγγελματίες υγείας και την ποιότητα υπηρεσιών — και υπερασπίζομαι εργαλεία που πραγματικά βελτιώνουν τη φροντίδα.", keyPoints:"• Κατανοώ πώς ο ρόλος μου έχει αλλάξει — και θα συνεχίσει να αλλάζει — με τα ψηφιακά εργαλεία\n• Αξιολογώ εργαλεία από πολλές οπτικές: ασθενής, κλινικός, οργανισμός, σύστημα υγείας\n• Γνωρίζω πώς να αναφέρω ανησυχίες για εργαλεία που θέτουν σε κίνδυνο ασφάλεια ασθενούς\n• Υπερασπίζομαι εργαλεία που βελτιώνουν ποιότητα φροντίδας — όχι μόνο λειτουργική αποδοτικότητα" }
+    ]
+  },
+  {
+    name: "Τομέας Ε: Ασφάλεια Δεδομένων και Κυβερνοασφάλεια στην Υγεία",
+    goal: "Οι επαγγελματίες υγείας αναγνωρίζουν κυβερνοαπειλές, εφαρμόζουν ασφαλείς ψηφιακές συμπεριφορές και εκπληρώνουν τις κανονιστικές τους υποχρεώσεις για την προστασία ασθενών, συναδέλφων και οργανισμού.",
+    context: "Η υγειονομική περίθαλψη είναι ο πιο στοχευόμενος τομέας για κυβερνοεπιθέσεις στην Ευρώπη. Ransomware, phishing και κλοπή διαπιστευτηρίων δεν είναι αφηρημένα ζητήματα πληροφορικής — κλείνουν νοσοκομεία, καθυστερούν χειρουργεία και θέτουν ασθενείς σε κίνδυνο. Από τον Οκτώβριο 2024, η Οδηγία NIS2 απαιτεί από όλους τους οργανισμούς υγείας να αντιμετωπίζουν την κυβερνοασφάλεια ως ζήτημα κλινικής διακυβέρνησης. Κάθε κλινικός έχει ρόλο: ισχυροί κωδικοί, κλείδωμα οθόνης, αναφορά ύποπτων emails — αυτή δεν είναι μόνο δουλειά του ΙΤ.",
+    letter: "Ε", letterClass: "de",
+    questions: [
+      { code:"E1", statement:"Κατανοώ το τοπίο κυβερνοαπειλών στην υγεία — phishing, ransomware, social engineering — και αναγνωρίζω ότι κάθε εργαζόμενος στον τομέα υγείας μοιράζεται την ευθύνη για την κυβερνοασφάλεια.", keyPoints:"• Γνωρίζω τις πιο κοινές απειλές: phishing, ransomware, κλοπή διαπιστευτηρίων, social engineering\n• Αντιμετωπίζω παραβίαση κυβερνοασφάλειας ως κλινικό κίνδυνο — μπορεί να σταματήσει τη φροντίδα άμεσα\n• Γνωρίζω ότι όλοι μοιράζονται ευθύνη — όχι μόνο ΙΤ (NIS2· GDPR, Άρθρο 32)\n• Αναφέρω άμεσα ύποπτα emails, ασυνήθιστη συμπεριφορά συστημάτων ή πιθανές παραβιάσεις" },
+      { code:"E2", statement:"Εφαρμόζω ασφαλείς ψηφιακές συμπεριφορές καθημερινά — ισχυρή διαχείριση διαπιστευτηρίων, κατάλληλη διαχείριση δεδομένων και επίγνωση κινδύνων από προσωπικές συσκευές και συνδεδεμένες τεχνολογίες.", keyPoints:"• Χρησιμοποιώ ισχυρούς, μοναδικούς κωδικούς και ενεργοποιώ MFA (έλεγχος ταυτότητας πολλαπλών παραγόντων — π.χ. κωδικός SMS) όπου υποστηρίζεται\n• Διατηρώ δεδομένα ασθενούς εκτός προσωπικών συσκευών — μόνο εγκεκριμένα εργαλεία\n• Εφαρμόζω πρακτικές καθαρής θέσης — κλειδώνω οθόνη, δεν αφήνω ορατές πληροφορίες ασθενούς\n• Είμαι προσεκτικός με συνδεδεμένες συσκευές (IoT) — αναφέρω στο ΙΤ αμέσως" },
+      { code:"E3", statement:"Συμμορφώνομαι με τη νομοθεσία ασφάλειας δεδομένων και οργανωσιακή πολιτική — GDPR Άρθρο 32 και Οδηγία NIS2 — και κατανοώ την προσωπική μου ευθύνη για μη συμμόρφωση.", keyPoints:"• Γνωρίζω τις πολιτικές ασφάλειας δεδομένων του οργανισμού μου\n• Γνωρίζω ότι GDPR Άρθρο 32 απαιτεί κατάλληλα τεχνικά και οργανωτικά μέτρα ασφάλειας\n• Γνωρίζω τις απαιτήσεις NIS2 για την υγεία ως βασική οντότητα\n• Γνωρίζω ότι ισχύει προσωπική ευθύνη σε περίπτωση αμελούς συμπεριφοράς" },
+      { code:"E4", statement:"Μπορώ να αναγνωρίσω και να αναφέρω περιστατικό κυβερνοασφάλειας ή παραβίαση δεδομένων — και κατανοώ την υποχρέωση κοινοποίησης εντός 72 ωρών βάσει GDPR.", keyPoints:"• Γνωρίζω τη διαδικασία αναφοράς και τα στοιχεία του Υπεύθυνου Προστασίας Δεδομένων (DPO)\n• Γνωρίζω τι συνιστά παραβίαση προσωπικών δεδομένων: μη εξουσιοδοτημένη πρόσβαση, αποκάλυψη, απώλεια ή τροποποίηση\n• Αναφέρω εσωτερικά αμέσως· GDPR Άρθρο 33 ενδέχεται να απαιτεί κοινοποίηση εντός 72 ωρών\n• Δεν προσπαθώ ποτέ να αποκρύψω παραβίαση — πάντα κλιμακώνω μέσω σωστής διαδρομής" },
+      { code:"E5", statement:"Γνωρίζω πώς να διατηρώ ασφαλή φροντίδα ασθενούς κατά τη διάρκεια κυβερνοπεριστατικού, και συμβάλλω ενεργά σε κουλτούρα ασφάλειας χωρίς κατηγορίες.", keyPoints:"• Γνωρίζω τη χειροκίνητη διαδικασία του οργανισμού μου για όταν τα συστήματα δεν είναι διαθέσιμα\n• Καλλιεργώ κουλτούρα αναφοράς χωρίς κατηγορίες — η καθυστέρηση επιδεινώνει τα περιστατικά\n• Στηρίζω συναδέλφους που αναφέρουν ανησυχίες\n• Αναγνωρίζω ότι η κουλτούρα ασφάλειας είναι κοινή ευθύνη ομάδας, όχι μόνο ΙΤ" }
+    ]
+  },
+  {
+    name: "Τομέας ΣΤ: Τεχνητή Νοημοσύνη στην Κλινική Πράξη",
+    goal: "Οι επαγγελματίες υγείας αναπτύσσουν εγγραμματισμό στην ΤΝ, κατανοούν ηθικές και κανονιστικές υποχρεώσεις και εμπλέκονται κριτικά με την ΤΝ — ανεξαρτήτως αν χρησιμοποιείται ήδη στο κλινικό τους περιβάλλον.",
+    context: "Η τεχνητή νοημοσύνη (ΤΝ) εισάγεται σε περιβάλλοντα υγείας με διαφορετικές ταχύτητες σε όλη την Ευρώπη. Μερικοί οργανισμοί τη χρησιμοποιούν ήδη σε διαγνωστική απεικόνιση, υποστήριξη κλινικών αποφάσεων και τεκμηρίωση. Άλλοι εξερευνούν ή βρίσκονται σε pilot. Όπου και αν βρίσκεστε σε αυτή την πορεία, τα θεμέλια έχουν σημασία: τι μπορεί και τι δεν μπορεί να κάνει η ΤΝ, οι ηθικές αρχές που διέπουν τη χρήση της, και το κανονιστικό τοπίο — ώστε να είστε έτοιμοι να εμπλακείτε με κριτική σκέψη και ασφάλεια.",
+    letter: "ΣΤ", letterClass: "df",
+    questions: [
+      { code:"F1", statement:"Κατανοώ βασικές έννοιες τεχνητής νοημοσύνης (ΤΝ) — μηχανική μάθηση, παραγωγική ΤΝ — και αξιολογώ κριτικά εργαλεία ΤΝ ως προς τις δυνατότητες, τους περιορισμούς και την πιθανή μεροληψία τους.", keyPoints:"• Κατανοώ τη διαφορά μεταξύ μηχανικής μάθησης, βαθιάς μάθησης και παραγωγικής ΤΝ\n• Γνωρίζω ότι εργαλεία ΤΝ μπορούν να παράγουν ανακριβείς ή κατασκευασμένες εξόδους (hallucinations) — πάντα επαληθεύω\n• Αξιολογώ εργαλεία ΤΝ με βάση κλινικά αποδεικτικά στοιχεία: είναι επικυρωμένο; Σε ποιον πληθυσμό;\n• Γνωρίζω ότι μεροληπτικά δεδομένα εκπαίδευσης παράγουν μεροληπτικά αποτελέσματα" },
+      { code:"F2", statement:"Κατανοώ τις ηθικές αρχές που διέπουν την ΤΝ στην υγεία — διαφάνεια, δικαιοσύνη, ανθρώπινη εποπτεία — και διασφαλίζω ότι η ΤΝ δεν αντικαθιστά ποτέ την κλινική μου κρίση.", keyPoints:"• Κατανοώ ότι η ΤΝ ενισχύει — δεν αντικαθιστά — κλινική κρίση· παραμένω πλήρως υπεύθυνος\n• Ελέγχω για δικαιοσύνη: εργαλεία ΤΝ πρέπει να λειτουργούν ισότιμα\n• Διατηρώ διαφάνεια: κατανοώ πώς χρησιμοποιείται ΤΝ στη διαδρομή φροντίδας\n• Γνωρίζω ότι ανθρώπινη εποπτεία υψηλού κινδύνου ΤΝ απαιτείται από EU AI Act — δεν είναι προαιρετική" },
+      { code:"F3", statement:"Κατανοώ το κανονιστικό τοπίο για την ΤΝ στην υγεία — ταξινομήσεις κινδύνου EU AI Act, δικαιώματα GDPR για αυτοματοποιημένες αποφάσεις, και πότε η ΤΝ χαρακτηρίζεται ιατροτεχνολογικό προϊόν.", keyPoints:"• Γνωρίζω ότι EU AI Act ταξινομεί την κλινική ΤΝ ως υψηλού κινδύνου — σήμανση CE απαιτείται\n• Γνωρίζω ότι GDPR Άρθρο 22 παρέχει δικαίωμα μη αυτοματοποιημένων αποφάσεων\n• Γνωρίζω ότι εργαλεία ΤΝ ενδέχεται να χαρακτηριστούν SaMD βάσει EU MDR\n• Κατανοώ ότι επαγγελματική ευθύνη παραμένει στον κλινικό ακόμη και όταν ΤΝ συνεισφέρει σε σφάλμα" },
+      { code:"F4", statement:"Όπου εργαλεία ΤΝ είναι διαθέσιμα στο περιβάλλον μου, τα χρησιμοποιώ αποτελεσματικά και επικυρώνω τις εξόδους τους — διατηρώντας επαγγελματική κρίση και ασφάλεια ασθενούς στο επίκεντρο.", keyPoints:"• Γνωρίζω πώς να χρησιμοποιώ σωστά τα εργαλεία ΤΝ στον χώρο εργασίας μου\n• Πάντα συγκρίνω εξόδους ΤΝ με επαγγελματική γνώση και κλινικά αποδεικτικά στοιχεία\n• Ελέγχω εξόδους παραγωγικής ΤΝ για hallucinations (κατασκευασμένες αναφορές, λανθασμένες δοσολογίες)\n• Παραμένω υπεύθυνος για κάθε απόφαση ακόμη και όταν ΤΝ βοηθά — τεκμηριώνω πάντα" },
+      { code:"F5", statement:"Εμπλέκομαι εποικοδομητικά με την ΤΝ στο περιβάλλον μου — είτε διερευνάται, είτε δοκιμάζεται σε pilot, είτε έχει αναπτυχθεί — στηρίζω συναδέλφους και συμβάλλω σε ασφαλή, υπεύθυνη χρήση ΤΝ.", keyPoints:"• Εμπλέκομαι με τις εξελίξεις ΤΝ στο πλαίσιό μου — εξερεύνηση, pilot ή ενεργή χρήση\n• Στηρίζω συναδέλφους που ανησυχούν ή αμφιταλαντεύονται για ΤΝ\n• Διασφαλίζω ότι ασθενείς ενημερώνονται για συνεισφορά ΤΝ στη φροντίδα (EU AI Act· GDPR)\n• Συμμετέχω σε αξιολόγηση ή διακυβέρνηση εργαλείων ΤΝ — αξιολόγηση κινδύνου, ανατροφοδότηση" }
+    ]
+  }
+];
+
+const el_ratingScale = [
+  { value:1, label:"Καμία εμπειρία ακόμη" },
+  { value:2, label:"Βασική κατανόηση" },
+  { value:3, label:"Εξοικειωμένος" },
+  { value:4, label:"Με αυτοπεποίθηση" },
+  { value:5, label:"Ηγείται και υποστηρίζει άλλους" }
+];
+
+const el_BADGE_URLS = {
+  formative:    'https://static.wixstatic.com/media/08b7dd_328c5fbe474046b59f633f1c52d06ad9~mv2.png',
+  intermediate: 'https://static.wixstatic.com/media/08b7dd_093e56797d2a4aa591e8dd1a13779031~mv2.png',
+  proficient:   'https://static.wixstatic.com/media/08b7dd_b1b7cc64cff04f3c8843357ff4be67c0~mv2.png'
+};
+
+const el_DOMAIN_BADGE_URLS = {
+  A_formative:    'https://static.wixstatic.com/media/08b7dd_9c40163edb6a468fb1df5ca6c5961c23~mv2.png',
+  A_intermediate: 'https://static.wixstatic.com/media/08b7dd_0629a5e8ddf04785b23efd455fa42294~mv2.png',
+  A_proficient:   'https://static.wixstatic.com/media/08b7dd_10c8533ffb0c4e67ac5d8e9595ec0639~mv2.png',
+  B_formative:    'https://static.wixstatic.com/media/08b7dd_d670142378974b6381990005bd65e484~mv2.png',
+  B_intermediate: 'https://static.wixstatic.com/media/08b7dd_3fd30b86a2ab44dc87632aa66793f23e~mv2.png',
+  B_proficient:   'https://static.wixstatic.com/media/08b7dd_e063dfcb07e840b797db17df1778454f~mv2.png',
+  C_formative:    'https://static.wixstatic.com/media/08b7dd_635d64ff58184a3199d7734a43faeabc~mv2.png',
+  C_intermediate: 'https://static.wixstatic.com/media/08b7dd_23f0bbfc0d2443629add584676bd83f9~mv2.png',
+  C_proficient:   'https://static.wixstatic.com/media/08b7dd_021f69e4198443379f06917eb47a385b~mv2.png',
+  D_formative:    'https://static.wixstatic.com/media/08b7dd_2550ad69bd574cb6927d58100fded2d2~mv2.png',
+  D_intermediate: 'https://static.wixstatic.com/media/08b7dd_3300305f5b8e486eb1fad26a7dd24902~mv2.png',
+  D_proficient:   'https://static.wixstatic.com/media/08b7dd_f5887bfaa0dd4c1396654773cc987b56~mv2.png',
+  E_formative:    'https://static.wixstatic.com/media/08b7dd_35c8ec74529e486c8cf4bafec7180173~mv2.png',
+  E_intermediate: 'https://static.wixstatic.com/media/08b7dd_859d0c93480f42479fc1e309f4daff8f~mv2.png',
+  E_proficient:   'https://static.wixstatic.com/media/08b7dd_da1fc6e208b84fea9848e327e2afcba2~mv2.png',
+  F_formative:    'https://static.wixstatic.com/media/08b7dd_d950f1d31c5a47a8bf91c352112e9ab1~mv2.png',
+  F_intermediate: 'https://static.wixstatic.com/media/08b7dd_2da2f9801b594708b80438805014f35b~mv2.png',
+  F_proficient:   'https://static.wixstatic.com/media/08b7dd_36b6c4ddab634526bbeda88b6885499b~mv2.png'
+};
+
+// ─── STATE ────────────────────────────────────────────────────
+let el_responses = {};
+let el_userData  = {};
+
+// ─── INIT ─────────────────────────────────────────────────────
+// buildDomainCards runs immediately (small, needed for visible accordion).
+// generateDomainSections is deferred with setTimeout(0) so it runs
+// after the first paint — this prevents it blocking touch events on
+// mobile during the 1-3 second DOM construction burst.
+document.addEventListener('DOMContentLoaded', function() {
+  el_buildDomainCards();
+  setTimeout(function() {
+    el_generateDomainSections();
+  }, 0);
+});
+
+// ─── DOMAIN OVERVIEW CARDS (in accordion) ─────────────────────
+function el_buildDomainCards() {
+  const grid = document.getElementById('domainCardsGrid-el');
+  if (!grid) return;
+  el_assessmentData.forEach(domain => {
+    const shortName = domain.name.replace('Τομέας '+domain.letter+': ','').replace('Domain '+domain.letter+': ','');
+    const card = document.createElement('div');
+    card.style.cssText = `background:#faf8f4; padding:28px 24px; border-top:2px solid var(--${domain.letterClass}); position:relative;`;
+    card.innerHTML = `
+      <div style="font-size:17px; font-weight:500; color:var(--${domain.letterClass}); margin-bottom:10px; line-height:1.3; font-family:'DM Sans',sans-serif;">${domain.letter} &mdash; ${shortName}</div>
+      <div style="font-size:14px; font-weight:300; color:var(--slate); font-style:italic; line-height:1.55;">${domain.goal}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ─── ACCORDION TOGGLES ────────────────────────────────────────
+function el_toggleInfo(id) {
+  const block = document.getElementById('acc-' + id);
+  if (!block) return;
+  block.classList.toggle('open');
+  const body = document.getElementById(id + '-body') || block.querySelector('.accordion-body');
+  if (body && id !== 'six-domains') {
+    body.style.display = block.classList.contains('open') ? 'block' : 'none';
+  }
+}
+
+// ─── SCROLL TO FORM ───────────────────────────────────────────
+function el_scrollToForm() {
+  const el = document.getElementById('personalInfoSection-el');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── FIELD VALIDATION ─────────────────────────────────────────
+function el_clearFieldError(fieldId) {
+  const field = document.getElementById(fieldId);
+  if (!field) return;
+  field.classList.remove('field-error');
+  const err = document.getElementById(fieldId + '_error');
+  if (err) err.remove();
+}
+
+function el_showFieldError(fieldId, message) {
+  const field = document.getElementById(fieldId);
+  if (!field) return;
+  field.classList.add('field-error');
+  let err = document.getElementById(fieldId + '_error');
+  if (!err) {
+    err = document.createElement('div');
+    err.id = fieldId + '_error';
+    err.className = 'field-error-msg';
+    field.parentNode.appendChild(err);
+  }
+  err.innerHTML = '⚠ ' + message;
+}
+
+// ─── SCROLL ENGINE ────────────────────────────────────────────
+// Target: #progressBand — scrolls so the progress bar sits at the very
+// top of the viewport, with completed domain headers and the active
+// domain visible below.
+//
+// Why window.scrollTo instead of scrollIntoView:
+//   position:sticky elements are considered "already visible" by browsers
+//   so scrollIntoView() on #progressBand is silently ignored. We compute
+//   the exact document Y with getBoundingClientRect + pageYOffset instead.
+//
+// Blur guard: document.activeElement.blur() called in startAssessment
+// and completeDomain before scrolling. Without it, mobile browsers
+// transfer focus to the next tabbable element in newly-shown content
+// and auto-scroll to it, overriding our scroll.
+
+// domainId kept for API compatibility; scroll target is always #progressBand.
+function el_scrollToDomainHeader(domainId) {
+  function doScroll() {
+    // Blur any focused element before scrolling — prevents the browser from
+    // immediately re-scrolling to a focused input inside the newly-shown domain.
+    try { if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur(); } catch(e) {}
+    var dc = document.getElementById('domainsContainer-el');
+    var pb = document.getElementById('progressBand-el');
+    if (!dc || !pb) return;
+    // progressBand has position:sticky. Once scrolled past it, getBoundingClientRect().top
+    // returns 0 (viewport-top), so the usual formula (rectTop + pageYOffset) becomes a
+    // no-op (= current scrollY). Instead we derive the band's natural document Y from
+    // domainsContainer — a non-sticky sibling that starts immediately after the band.
+    var domainsAbsY = dc.getBoundingClientRect().top + window.pageYOffset;
+    var y = Math.max(0, domainsAbsY - pb.offsetHeight);
+    // 'instant' guarantees pixel-perfect snap — 'smooth' can land a few px short.
+    window.scrollTo({ top: y, behavior: 'instant' });
+  }
+  // Double rAF ensures DOM reflow from show/hide is complete before measuring.
+  // Extra shots at 150 ms and 400 ms re-assert the position after any async
+  // browser focus-scroll that fires when newly-shown domain inputs become focusable.
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      doScroll();
+      setTimeout(doScroll, 150);
+      setTimeout(doScroll, 400);
+    });
+  });
+}
+
+// ─── START ASSESSMENT ─────────────────────────────────────────
+function el_startAssessment() {
+  // Mandatory field validation currently inactive — all fields optional.
+  ['givenName','familyName','email','profession','teamName','organisationName','city','country'].forEach(clearFieldError);
+  const gn  = document.getElementById('givenName-el').value.trim()  || 'Test';
+  const fn  = document.getElementById('familyName-el').value.trim() || 'User';
+  const em  = document.getElementById('email-el').value.trim()      || 'test@test.com';
+  const pr  = document.getElementById('profession-el').value        || 'physician';
+  const tn  = document.getElementById('teamName-el').value.trim()   || 'Test Team';
+  const org = document.getElementById('organisationName-el').value.trim() || 'Test Org';
+  const ci  = document.getElementById('city-el').value.trim()       || 'Athens';
+  const co  = document.getElementById('country-el').value           || 'GR';
+  el_userData = { givenName:gn, familyName:fn, email:em, profession:pr, teamName:tn, organisationName:org, city:ci, country:co };
+
+  document.getElementById('personalInfoSection-el').classList.add('hidden');
+  document.getElementById('infoBand-el').classList.add('hidden');
+  document.getElementById('coverSection-el').classList.add('hidden');
+  const strip = document.querySelector('#root-el .domains-strip');
+  if (strip) strip.classList.add('hidden');
+  document.getElementById('assessmentSection-el').classList.remove('hidden');
+  document.getElementById('root-el').classList.add('in-assessment');
+
+  // Open domain 1
+  document.getElementById('domain1Content-el').classList.add('active');
+  document.getElementById('domain1StatusBadge-el').textContent = 'Σε Εξέλιξη';
+  document.getElementById('domain1StatusBadge-el').classList.add('in-progress');
+
+  // Blur focused button — prevents mobile browsers auto-scrolling to the
+  // next tabbable element in newly-shown content and overriding our scroll.
+  try { if (document.activeElement) document.activeElement.blur(); } catch(e) {}
+
+  // Scroll to the very top so the assessment header, integrity notice,
+  // and progress bar are all visible when the assessment opens.
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ─── GENERATE DOMAIN SECTIONS ─────────────────────────────────
+function el_generateDomainSections() {
+  const container = document.getElementById('domainsContainer-el');
+  el_assessmentData.forEach((domain, idx) => {
+    const id = idx + 1;
+    const isFirst = id === 1;
+    const section = document.createElement('div');
+    section.className = 'domain-section';
+    section.id = `domainSection${id}`;
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'domain-header' + (isFirst ? '' : ' locked');
+    header.id = `domain${id}Header-el`;
+    header.onclick = () => el_toggleDomain(id);
+    header.innerHTML = `
+      <div class="domain-header-left">
+        <div class="domain-letter-badge ${domain.letterClass}">${domain.letter}</div>
+        <div class="domain-header-text">
+          <h3>${domain.name}</h3>
+          <div class="domain-goal-text">${domain.goal}</div>
+        </div>
+      </div>
+      <div class="domain-status-badge${isFirst ? '' : ''}" id="domain${id}StatusBadge-el">${isFirst ? 'Not Started' : 'Locked'}</div>
+    `;
+
+    // Content
+    const content = document.createElement('div');
+    content.className = 'domain-content';
+    content.id = `domain${id}Content-el`;
+
+    let html = `<div class="domain-content-inner">
+      <div class="domain-context-block"><p>${domain.context}</p></div>`;
+
+    domain.questions.forEach((q, qi) => {
+      html += `
+        <div class="question-group">
+          <div class="question-header">
+            <div class="question-code-row"><span class="question-code">${q.code}</span></div>
+            <div class="question-statement">${q.statement}</div>
+            ${q.keyPoints ? `<div class="question-keypoints"><div class="question-keypoints-label">Do you —</div>${q.keyPoints}</div>` : ''}
+          </div>
+          <div class="rating-scale-hint">1 = Καμία εμπειρία &nbsp;·&nbsp; 3 = Εξοικειωμένος &nbsp;·&nbsp; 5 = Ηγείται</div>
+          <div class="rating-options">`;
+      el_ratingScale.forEach(opt => {
+        html += `
+            <label class="rating-option" onclick="el_selectRating(${id},${qi+1},${opt.value},this)">
+              <input type="radio" name="d${id}_q${qi+1}" value="${opt.value}">
+              <div class="rating-number">${opt.value}</div>
+              <div class="rating-label">${opt.label}</div>
+            </label>`;
+      });
+      html += `</div></div>`;
+    });
+
+    html += `
+      <div class="complete-btn-row">
+        <button class="btn-complete-domain" id="completeDomain${id}Btn-el" onclick="el_completeDomain(${id})" disabled>
+          Ολοκλήρωση Τομέα ${domain.letter} →
+        </button>
+      </div>
+    </div>`;
+
+    content.innerHTML = html;
+    section.appendChild(header);
+    section.appendChild(content);
+    container.appendChild(section);
+  });
+}
+
+// ─── TOGGLE DOMAIN ────────────────────────────────────────────
+function el_toggleDomain(id) {
+  const header  = document.getElementById(`domain${id}Header-el`);
+  const content = document.getElementById(`domain${id}Content-el`);
+  if (header.classList.contains('locked')) return;
+  content.classList.toggle('active');
+}
+
+// ─── SELECT RATING ────────────────────────────────────────────
+function el_selectRating(domainId, qId, value, el) {
+  if (!el_responses[domainId]) el_responses[domainId] = {};
+  el_responses[domainId][qId] = value;
+  el.parentElement.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById(`completeDomain${domainId}Btn-el`);
+  const done = Object.keys(el_responses[domainId]).length === el_assessmentData[domainId-1].questions.length;
+  btn.disabled = !done;
+}
+
+// ─── LEVEL HELPERS ────────────────────────────────────────────
+function el_getLevel(avg) {
+  if (avg >= 4)   return 'Proficient';
+  if (avg >= 2.5) return 'Intermediate';
+  return 'Formative';
+}
+
+function el_getLevelColors(level) {
+  if (level === 'Proficient')   return { bg:'rgba(184,149,58,0.15)',  text:'#7a6020', border:'#b8953a' };
+  if (level === 'Intermediate') return { bg:'rgba(100,116,139,0.12)', text:'#475569', border:'#64748b' };
+  return                                { bg:'rgba(155,58,42,0.12)',   text:'#7a2a1a', border:'#9b3a2a' };
+}
+
+// ─── COMPLETE DOMAIN ──────────────────────────────────────────
+function el_completeDomain(id) {
+  const dom   = el_assessmentData[id-1];
+  const resps = el_responses[id] || {};
+  if (Object.keys(resps).length < dom.questions.length) {
+    alert(`Παρακαλώ απαντήστε σε όλες τις ${dom.questions.length} ερωτήσεις αυτού του τομέα.`);
+    return;
+  }
+  const avg   = Object.values(resps).reduce((a,b)=>a+b,0) / dom.questions.length;
+  const level = el_getLevel(avg);
+  const colors= el_getLevelColors(level);
+
+  // Update status badge
+  const badge = document.getElementById(`domain${id}StatusBadge-el`);
+  const levelLabels = {'Formative':'Αρχικό','Intermediate':'Ενδιάμεσο','Proficient':'Προχωρημένο'}; badge.textContent = levelLabels[level] || level;
+  badge.style.cssText = `font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; padding:5px 12px; border-radius:2px; border:1px solid ${colors.border}; background:${colors.bg}; color:${colors.text}; white-space:nowrap; flex-shrink:0; margin-top:4px;`;
+
+  // Mark header
+  const header = document.getElementById(`domain${id}Header-el`);
+  header.classList.add('completed');
+  header.classList.remove('locked');
+  header.style.borderLeft = `3px solid ${colors.border}`;
+
+  // Close content
+  document.getElementById(`domain${id}Content-el`).classList.remove('active');
+
+  el_updateProgress();
+
+  const nextId = id + 1;
+  if (nextId <= 6) {
+    const nextHeader = document.getElementById(`domain${nextId}Header-el`);
+    const nextBadge  = document.getElementById(`domain${nextId}StatusBadge-el`);
+    nextHeader.classList.remove('locked');
+    nextBadge.textContent = 'Σε Εξέλιξη';
+    nextBadge.classList.add('in-progress');
+    document.getElementById(`domain${nextId}Content-el`).classList.add('active');
+    // Blur focused button — prevents mobile browsers auto-scrolling to the
+    // next tabbable element inside the newly-opened domain.
+    try { if (document.activeElement) document.activeElement.blur(); } catch(e) {}
+    el_scrollToDomainHeader(nextId);
+  } else {
+    el_showResults();
+  }
+}
+
+// ─── UPDATE PROGRESS ──────────────────────────────────────────
+function el_updateProgress() {
+  let done = 0;
+  for (let i=1; i<=6; i++) {
+    if (el_responses[i] && Object.keys(el_responses[i]).length === 5) done++;
+  }
+  const pct = (done/6)*100;
+  document.getElementById('progressFill-el').style.width = pct + '%';
+  document.getElementById('progressText-el').textContent = `${done} από 6 τομείς`;
+}
+
+// ─── SHOW RESULTS ─────────────────────────────────────────────
+function el_showResults() {
+  document.getElementById('assessmentSection-el').classList.add('hidden');
+  document.getElementById('root-el').classList.remove('in-assessment');
+  const resultsEl = document.getElementById('resultsSection-el');
+  resultsEl.classList.add('active');
+  requestAnimationFrame(function() {
+    var rs = document.getElementById('resultsSection-el');
+    if (rs) rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('userNameDisplay-el').textContent = `${el_userData.givenName} ${el_userData.familyName}`;
+  const today = new Date();
+  document.getElementById('completionDate-el').textContent = 'Ολοκληρώθηκε: ' + today.toLocaleDateString('el-GR',{year:'numeric',month:'long',day:'numeric'});
+
+  let total = 0;
+  const domainLevels = [];
+  for (let i=1; i<=6; i++) {
+    const vals  = Object.values(el_responses[i]);
+    const avg   = vals.reduce((a,b)=>a+b,0)/vals.length;
+    total += avg;
+    domainLevels.push({avg, level:el_getLevel(avg), colors:el_getLevelColors(el_getLevel(avg))});
+  }
+  const overallAvg   = total/6;
+  const overallLevel = el_getLevel(overallAvg);
+  const overallColors= el_getLevelColors(overallLevel);
+
+  // Overall achievement badge image
+  document.getElementById('badgeImage-el').src = el_BADGE_URLS[overallLevel.toLowerCase()];
+
+  // Metallic gradient on "Self-Assessment | Overall" badge — matches level colour
+  const _metallic = {
+    formative:    'linear-gradient(135deg,#7a4518 0%,#cd7f32 40%,#f0b060 60%,#cd7f32 80%,#7a4518 100%)',
+    intermediate: 'linear-gradient(135deg,#3a3a3a 0%,#a0a0a0 40%,#dedede 60%,#a0a0a0 80%,#3a3a3a 100%)',
+    proficient:   'linear-gradient(135deg,#5c3a0a 0%,#b8953a 40%,#e8c86e 60%,#b8953a 80%,#5c3a0a 100%)'
+  };
+  const satBadge = document.getElementById('resultsSATBadge-el');
+  if (satBadge) {
+    satBadge.style.background = _metallic[overallLevel.toLowerCase()] || _metallic.proficient;
+    satBadge.style.color = overallLevel.toLowerCase() === 'intermediate' ? '#111' : '#0f2535';
+  }
+
+  // Domain result cards — letter+name left, badge top-right, score below
+  const grid = document.getElementById('domainResultsGrid-el');
+  grid.innerHTML = '';
+  el_assessmentData.forEach((domain, idx) => {
+    const {level, avg} = domainLevels[idx];
+    const _grToLatin = {'Α':'A','Β':'B','Γ':'C','Δ':'D','Ε':'E','ΣΤ':'F'};
+    const _latinLetter = _grToLatin[domain.letter] || domain.letter;
+    const badgeSrc = el_DOMAIN_BADGE_URLS[`${_latinLetter}_${level.toLowerCase()}`] || '';
+    const shortName = domain.name.replace('Τομέας '+domain.letter+': ','').replace('Domain '+domain.letter+': ','');
+    const card = document.createElement('div');
+    card.className = 'domain-result-card';
+    card.innerHTML = `
+      <div class="domain-result-card-left">
+        <div class="domain-result-letter" style="color:var(--${domain.letterClass})">${domain.letter}</div>
+        <div class="domain-result-name">${shortName}</div>
+        <div class="domain-result-score">Βαθμολογία: ${avg.toFixed(1)} / 5,0</div>
+      </div>
+      <div class="domain-result-card-badge">
+        <img src="${badgeSrc}" alt="${domain.letter} ${level}" style="width:clamp(70px,8vw,100px); height:clamp(70px,8vw,100px); object-fit:contain; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ─── RETAKE ───────────────────────────────────────────────────
+function el_retakeAssessment() {
+  if (!confirm('Επαναλάβετε την αξιολόγηση; Οι τρέχουσες απαντήσεις θα διαγραφούν.')) return;
+  el_responses = {};
+  for (let i=1; i<=6; i++) {
+    const h = document.getElementById(`domain${i}Header-el`);
+    const c = document.getElementById(`domain${i}Content-el`);
+    const b = document.getElementById(`domain${i}StatusBadge-el`);
+    h.classList.remove('completed');
+    h.style.borderLeft = '';
+    if (i>1) { h.classList.add('locked'); b.textContent='Κλειδωμένο'; b.classList.remove('in-progress'); }
+    else { b.textContent='Δεν έχει ξεκινήσει'; b.style.cssText=''; }
+    c.classList.remove('active');
+    c.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+    c.querySelectorAll('.rating-option').forEach(o=>o.classList.remove('selected'));
+    document.getElementById(`completeDomain${i}Btn-el`).disabled = true;
+  }
+  document.getElementById('progressFill-el').style.width='0%';
+  document.getElementById('progressText-el').textContent='0 από 6 τομείς';
+  document.getElementById('resultsSection-el').classList.remove('active');
+  document.getElementById('root-el').classList.add('in-assessment');
+  document.getElementById('assessmentSection-el').classList.remove('hidden');
+  document.getElementById('root-el').classList.add('in-assessment');
+  document.getElementById('domain1Content-el').classList.add('active');
+  document.getElementById('domain1StatusBadge-el').textContent='In Progress';
+  document.getElementById('domain1StatusBadge-el').classList.add('in-progress');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ─── VIEW COURSES ─────────────────────────────────────────────
+function el_viewRelevantCourses() {
+  let overall = 'Unknown';
+  const img = document.getElementById('badgeImage-el');
+  if (img && img.alt) { overall = img.alt.includes('formative') ? 'Formative' : img.alt.includes('intermediate') ? 'Intermediate' : 'Proficient'; }
+  alert(`Σχετικά μαθήματα για το επίπεδο ${overall}\n\nΑυτή η λειτουργία θα σας ανακατευθύνει σε μαθήματα ανάλογα με το προφίλ ικανοτήτων σας. Ο κατάλογος μαθημάτων βρίσκεται υπό ανάπτυξη.`);
+}
+
+// Auto-save el_responses every 30 seconds
+setInterval(() => {
+  try { localStorage.setItem('edha_assessment', JSON.stringify({el_userData, el_responses, ts: new Date().toISOString()})); }
+  catch(e) {}
+}, 30000);
+
+
+</script>
+
+<script>
+
+(function() {
+  var sw = document.getElementById('lang-switch');
+  var params = new URLSearchParams(window.location.search);
+  var stored = localStorage.getItem('odeon_lang');
+  var lang = params.get('lang') || stored || 'en';
+  if (lang === 'gr') { sw.checked = true; }
+  sw.addEventListener('change', function() {
+    var l = sw.checked ? 'gr' : 'en';
+    localStorage.setItem('odeon_lang', l);
+    var url = new URL(window.location);
+    url.searchParams.set('lang', l);
+    window.history.replaceState({}, '', url);
+  });
+})();
+
+</script>
+
 </body>
 </html>
