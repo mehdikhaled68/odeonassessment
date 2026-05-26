@@ -1136,29 +1136,50 @@ footer {
 
 footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
 
-/* ── EYEBROW V2 — two-line ODEON branding ────────────────────── */
+/* ── BRAND HEADER — logo left · academy name right ───────────── */
 .eyebrow-v2 {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+  min-height: 52px;
+}
+
+/* Logo container — left side */
+.eyebrow-v2-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.eyebrow-v2-logo img {
+  height: 52px;
+  width: auto;
+  display: block;
+}
+
+/* Academy name — right side, 3 stacked lines */
+.eyebrow-v2-academy {
+  display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 24px;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0px;
+  height: 52px;
 }
-.eyebrow-v2-org {
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  font-weight: 700;
+
+.eyebrow-v2-academy span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #b8965a;
+  line-height: 1.22;
+  letter-spacing: 0.01em;
+  display: block;
+  text-align: right;
 }
-.eyebrow-v2-acad {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  opacity: 0.75;
-}
+
 /* Inline badge (only as wide as its text) — assessment page */
 .eyebrow-v2-badge {
   margin-top: 8px;
@@ -1174,9 +1195,35 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   font-weight: 600;
   box-shadow: 0 0 12px rgba(184,149,58,0.4);
 }
+
+/* Assessment header: badge sits below the logo row */
+.eyebrow-v2--with-badge {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.eyebrow-v2--with-badge .eyebrow-v2-badge {
+  flex-basis: 100%;
+  margin-top: 10px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .eyebrow-v2-logo img { height: 40px; }
+  .eyebrow-v2-academy span { font-size: 14px; }
+  .eyebrow-v2 { min-height: 40px; margin-bottom: 20px; }
+  .eyebrow-v2-academy { height: 40px; }
+}
+
+@media (max-width: 480px) {
+  .eyebrow-v2-logo img { height: 34px; }
+  .eyebrow-v2-academy span { font-size: 12px; }
+  .eyebrow-v2 { min-height: 34px; }
+  .eyebrow-v2-academy { height: 34px; }
+}
 /* Results hero: "Self-Assessment | Overall" — color set via JS */
-#resultsSATBadge {
-  margin-top: 8px;
+#resultsSATBadge,
+#resultsSATBadge-el {
+  flex-basis: 100%;
   align-self: flex-start;
   font-family: 'DM Mono', monospace;
   font-size: 10px;
@@ -1186,6 +1233,7 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   padding: 5px 14px;
   border-radius: 2px;
   font-weight: 700;
+  width: fit-content;
   /* default gold; overridden by JS based on achieved level */
   background: linear-gradient(135deg, #5c3a0a 0%, #b8953a 45%, #e8c86e 65%, #b8953a 80%, #5c3a0a 100%);
 }
@@ -1566,8 +1614,14 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   </div>
   <div class="cover-inner">
     <div class="eyebrow-v2">
-      <span class="eyebrow-v2-org">ODEON</span>
-      <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+      <div class="eyebrow-v2-logo">
+        <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
+      </div>
+      <div class="eyebrow-v2-academy">
+        <span>European</span>
+        <span>Digital Health</span>
+        <span>Academy</span>
+      </div>
     </div>
 
     <h1 class="cover-title">Digital Health<br><em>Capability</em><br>Self-Assessment</h1>
@@ -1923,9 +1977,15 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   <!-- Assessment Start Header -->
   <div class="assessment-start-header">
     <div class="assessment-start-header-inner">
-      <div class="eyebrow-v2">
-        <span class="eyebrow-v2-org">ODEON</span>
-        <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+      <div class="eyebrow-v2 eyebrow-v2--with-badge">
+        <div class="eyebrow-v2-logo">
+          <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
+        </div>
+        <div class="eyebrow-v2-academy">
+          <span>European</span>
+          <span>Digital Health</span>
+          <span>Academy</span>
+        </div>
         <span class="eyebrow-v2-badge">Self-Assessment Tool</span>
       </div>
     </div>
@@ -1970,9 +2030,15 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
     <div class="cover-grid"></div>
     <div class="results-hero-inner">
       <div>
-        <div class="eyebrow-v2">
-          <span class="eyebrow-v2-org">ODEON</span>
-          <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+        <div class="eyebrow-v2 eyebrow-v2--with-badge">
+          <div class="eyebrow-v2-logo">
+            <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
+          </div>
+          <div class="eyebrow-v2-academy">
+            <span>European</span>
+            <span>Digital Health</span>
+            <span>Academy</span>
+          </div>
           <span id="resultsSATBadge">Self-Assessment | Overall</span>
         </div>
         <h1 class="results-name" id="userNameDisplay"></h1>
@@ -2031,8 +2097,14 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   </div>
   <div class="cover-inner">
     <div class="eyebrow-v2">
-      <span class="eyebrow-v2-org">ODEON</span>
-      <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+      <div class="eyebrow-v2-logo">
+        <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
+      </div>
+      <div class="eyebrow-v2-academy">
+        <span>European</span>
+        <span>Digital Health</span>
+        <span>Academy</span>
+      </div>
     </div>
 
     <h1 class="cover-title">Αξιολόγηση<br><em>Ικανοτήτων</em><br>Ψηφιακής Υγείας</h1>
@@ -2388,9 +2460,15 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   <!-- Assessment Start Header -->
   <div class="assessment-start-header">
     <div class="assessment-start-header-inner">
-      <div class="eyebrow-v2">
-        <span class="eyebrow-v2-org">ODEON</span>
-        <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+      <div class="eyebrow-v2 eyebrow-v2--with-badge">
+        <div class="eyebrow-v2-logo">
+          <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
+        </div>
+        <div class="eyebrow-v2-academy">
+          <span>European</span>
+          <span>Digital Health</span>
+          <span>Academy</span>
+        </div>
         <span class="eyebrow-v2-badge">Εργαλείο Αυτοαξιολόγησης</span>
       </div>
     </div>
@@ -2435,9 +2513,15 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
     <div class="cover-grid"></div>
     <div class="results-hero-inner">
       <div>
-        <div class="eyebrow-v2">
-          <span class="eyebrow-v2-org">ODEON</span>
-          <span class="eyebrow-v2-acad">European Digital Health Academy</span>
+        <div class="eyebrow-v2 eyebrow-v2--with-badge">
+          <div class="eyebrow-v2-logo">
+            <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
+          </div>
+          <div class="eyebrow-v2-academy">
+            <span>European</span>
+            <span>Digital Health</span>
+            <span>Academy</span>
+          </div>
           <span id="resultsSATBadge-el">Αυτοαξιολόγηση | Συνολικό</span>
         </div>
         <h1 class="results-name" id="userNameDisplay-el"></h1>
