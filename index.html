@@ -6,6 +6,7 @@
 <meta name="author" content="Dr Mehdi Khaled">
 <meta name="last-updated" content="2026-05-26">
 <title>ODEON · Digital Health Self-Assessment · EN / GR</title>
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="shortcut icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
@@ -1148,42 +1149,49 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   min-height: 62px;
 }
 
-/* Logo container — left side */
+/* Logo + academy name — grouped left */
 .eyebrow-v2-logo {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  gap: 0;
   flex-shrink: 0;
+  line-height: 0;
 }
 
 .eyebrow-v2-logo img {
   height: 62px;
   width: auto;
   display: block;
+  vertical-align: bottom;
 }
 
-/* Academy name — right side, 3 stacked lines */
+/* Vertical separator — 10px gap each side, 1px white line */
 .eyebrow-v2-academy {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2px;
-  height: 62px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0;
+  padding-left: 20px;
+  margin-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.45);
+  align-self: flex-end;
 }
 
+/* 3 lines — DM Mono original style */
 .eyebrow-v2-academy span {
   font-family: 'DM Mono', monospace;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-light);
   opacity: 0.85;
-  line-height: 1.4;
+  line-height: 1.59;
   display: block;
-  text-align: right;
+  text-align: left;
 }
 
-/* Inline badge (only as wide as its text) — assessment page */
+/* Inline badge */
 .eyebrow-v2-badge {
   margin-top: 8px;
   align-self: flex-start;
@@ -1209,21 +1217,7 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   margin-top: 10px;
 }
 
-/* Mobile */
-@media (max-width: 640px) {
-  .eyebrow-v2-logo img { height: 48px; }
-  .eyebrow-v2-academy span { font-size: 9px; letter-spacing: 0.14em; }
-  .eyebrow-v2 { min-height: 48px; margin-bottom: 20px; }
-  .eyebrow-v2-academy { height: 48px; }
-}
-
-@media (max-width: 480px) {
-  .eyebrow-v2-logo img { height: 40px; }
-  .eyebrow-v2-academy span { font-size: 8px; letter-spacing: 0.12em; }
-  .eyebrow-v2 { min-height: 40px; }
-  .eyebrow-v2-academy { height: 40px; }
-}
-/* Results hero: "Self-Assessment | Overall" — color set via JS */
+/* Results hero badge */
 #resultsSATBadge,
 #resultsSATBadge-el {
   flex-basis: 100%;
@@ -1237,9 +1231,24 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   border-radius: 2px;
   font-weight: 700;
   width: fit-content;
-  /* default gold; overridden by JS based on achieved level */
   background: linear-gradient(135deg, #5c3a0a 0%, #b8953a 45%, #e8c86e 65%, #b8953a 80%, #5c3a0a 100%);
 }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .eyebrow-v2-logo img { height: 48px; }
+  .eyebrow-v2-academy { padding-left: 14px; margin-left: 8px; }
+  .eyebrow-v2-academy span { font-size: 10px; letter-spacing: 0.14em; line-height: 1.6; }
+  .eyebrow-v2 { min-height: 48px; margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+  .eyebrow-v2-logo img { height: 40px; }
+  .eyebrow-v2-academy { padding-left: 12px; margin-left: 6px; }
+  .eyebrow-v2-academy span { font-size: 8.5px; letter-spacing: 0.12em; line-height: 1.57; }
+  .eyebrow-v2 { min-height: 40px; }
+}
+
 
 /* ── ASSESSMENT START HEADER ─────────────────────────────────── */
 .assessment-start-header {
@@ -1619,11 +1628,11 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
     <div class="eyebrow-v2">
       <div class="eyebrow-v2-logo">
         <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
-      </div>
-      <div class="eyebrow-v2-academy">
-        <span>European</span>
-        <span>Digital Health</span>
-        <span>Academy</span>
+        <div class="eyebrow-v2-academy">
+          <span>European</span>
+          <span>Digital Health</span>
+          <span>Academy</span>
+        </div>
       </div>
     </div>
 
@@ -1983,11 +1992,11 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
       <div class="eyebrow-v2 eyebrow-v2--with-badge">
         <div class="eyebrow-v2-logo">
           <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
-        </div>
-        <div class="eyebrow-v2-academy">
-          <span>European</span>
-          <span>Digital Health</span>
-          <span>Academy</span>
+          <div class="eyebrow-v2-academy">
+            <span>European</span>
+            <span>Digital Health</span>
+            <span>Academy</span>
+          </div>
         </div>
         <span class="eyebrow-v2-badge">Self-Assessment Tool</span>
       </div>
@@ -2036,11 +2045,11 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
         <div class="eyebrow-v2 eyebrow-v2--with-badge">
           <div class="eyebrow-v2-logo">
             <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
-          </div>
-          <div class="eyebrow-v2-academy">
-            <span>European</span>
-            <span>Digital Health</span>
-            <span>Academy</span>
+            <div class="eyebrow-v2-academy">
+              <span>European</span>
+              <span>Digital Health</span>
+              <span>Academy</span>
+            </div>
           </div>
           <span id="resultsSATBadge">Self-Assessment | Overall</span>
         </div>
@@ -2102,11 +2111,11 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
     <div class="eyebrow-v2">
       <div class="eyebrow-v2-logo">
         <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
-      </div>
-      <div class="eyebrow-v2-academy">
-        <span>European</span>
-        <span>Digital Health</span>
-        <span>Academy</span>
+        <div class="eyebrow-v2-academy">
+          <span>European</span>
+          <span>Digital Health</span>
+          <span>Academy</span>
+        </div>
       </div>
     </div>
 
@@ -2466,11 +2475,11 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
       <div class="eyebrow-v2 eyebrow-v2--with-badge">
         <div class="eyebrow-v2-logo">
           <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
-        </div>
-        <div class="eyebrow-v2-academy">
-          <span>European</span>
-          <span>Digital Health</span>
-          <span>Academy</span>
+          <div class="eyebrow-v2-academy">
+            <span>European</span>
+            <span>Digital Health</span>
+            <span>Academy</span>
+          </div>
         </div>
         <span class="eyebrow-v2-badge">Εργαλείο Αυτοαξιολόγησης</span>
       </div>
@@ -2519,11 +2528,11 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
         <div class="eyebrow-v2 eyebrow-v2--with-badge">
           <div class="eyebrow-v2-logo">
             <img src="ODEON_Arch_Bayer_-_SVG.svg" alt="ODEON">
-          </div>
-          <div class="eyebrow-v2-academy">
-            <span>European</span>
-            <span>Digital Health</span>
-            <span>Academy</span>
+            <div class="eyebrow-v2-academy">
+              <span>European</span>
+              <span>Digital Health</span>
+              <span>Academy</span>
+            </div>
           </div>
           <span id="resultsSATBadge-el">Αυτοαξιολόγηση | Συνολικό</span>
         </div>
